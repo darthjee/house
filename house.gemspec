@@ -19,6 +19,9 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency 'activesupport'
 
+  gem.add_development_dependency "activerecord"
+  gem.add_development_dependency "sqlite3"
+
   gem.add_development_dependency "bundler", "~> 1.6"
   gem.add_development_dependency "rake"
   gem.add_development_dependency "rspec", "~> 2.14"
