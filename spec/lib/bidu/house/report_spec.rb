@@ -15,25 +15,25 @@ describe Bidu::House::Report do
   end
 
   describe '#status' do
-    context 'where are more errors than the allowed by the threshold' do
+    context 'when are more errors than the allowed by the threshold' do
       let(:errors) { 1 }
       let(:successes) { 3 }
       it { expect(subject.status).to eq(:error) }
     end
 
-    context 'where the threshold is 0 and there are no errors' do
+    context 'when the threshold is 0 and there are no errors' do
       let(:errors) { 0 }
       let(:threshold) { 0 }
       it { expect(subject.status).to eq(:ok) }
     end
 
-    context 'where the threshold is 100% and there is 100% error' do
+    context 'when the threshold is 100% and there is 100% error' do
       let(:successes) { 0 }
       let(:threshold) { 1 }
       it { expect(subject.status).to eq(:ok) }
     end
 
-    context 'where there are no documents' do
+    context 'when there are no documents' do
       let(:successes) { 0 }
       let(:errors) { 0 }
       it { expect(subject.status).to eq(:ok) }
@@ -52,6 +52,48 @@ describe Bidu::House::Report do
 
         it 'consider the older errros' do
           expect(subject.status).to eq(:error)
+        end
+      end
+    end
+  end
+
+  describe 'percentage' do
+    context 'when there are 25% erross' do
+      let(:errors) { 1 }
+      let(:successes) { 3 }
+      it { expect(subject.percentage).to eq(0.25) }
+    end
+
+    context 'when there are no errors' do
+      let(:errors) { 0 }
+      let(:threshold) { 0 }
+      it { expect(subject.percentage).to eq(0) }
+    end
+
+    context 'when there is 100% error' do
+      let(:successes) { 0 }
+      let(:threshold) { 1 }
+      it { expect(subject.percentage).to eq(1) }
+    end
+
+    context 'when there are no documents' do
+      let(:successes) { 0 }
+      let(:errors) { 0 }
+      it { expect(subject.percentage).to eq(0) }
+    end
+
+    context 'when there are older errors out of the period' do
+      let(:old_errors) { 2 }
+
+      it 'ignores the older errros' do
+        expect(subject.percentage).to eq(0.5)
+      end
+
+      context 'when passing a bigger period' do
+        let(:period) { 3.days }
+
+        it 'consider the older errros' do
+          expect(subject.percentage).to eq(0.75)
         end
       end
     end
