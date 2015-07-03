@@ -1,0 +1,2 @@
+module Bidu::House
+end

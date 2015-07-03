@@ -1,0 +1,26 @@
+# coding: utf-8
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'bidu/house/version'
+
+Gem::Specification.new do |gem|
+  gem.name          = 'bidu-house'
+  gem.version       = Bidu::House::VERSION
+  gem.authors       = ["Bidu Dev's Team"]
+  gem.email         = ["dev@bidu.com.br"]
+  gem.homepage      = 'https://github.com/Bidu/house'
+  gem.description   = 'Gem for easy health check'
+  gem.summary       = gem.description
+
+  gem.files         = `git ls-files`.split($/)
+  gem.executables   = gem.files.grep(%r{^bin/}) { |f| File.basename(f)  }
+  gem.test_files    = gem.files.grep(%r{^(test|gem|features)/})
+  gem.require_paths = ["lib"]
+
+  gem.add_runtime_dependency 'activesupport'
+
+  gem.add_development_dependency "bundler", "~> 1.6"
+  gem.add_development_dependency "rake"
+  gem.add_development_dependency "rspec", "~> 2.14"
+  gem.add_development_dependency 'simplecov'
+end
