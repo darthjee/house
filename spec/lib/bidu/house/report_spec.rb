@@ -58,7 +58,7 @@ describe Bidu::House::Report do
   end
 
   describe 'percentage' do
-    context 'when there are 25% erross' do
+    context 'when there are 25% erros' do
       let(:errors) { 1 }
       let(:successes) { 3 }
       it { expect(subject.percentage).to eq(0.25) }
@@ -94,6 +94,44 @@ describe Bidu::House::Report do
 
         it 'consider the older errros' do
           expect(subject.percentage).to eq(0.75)
+        end
+      end
+    end
+  end
+
+  describe '#scoped' do
+    context 'when there are 25% erros' do
+      let(:errors) { 1 }
+      let(:successes) { 3 }
+      it 'returns only the scoped documents' do
+        expect(subject.scoped.count).to eq(1)
+      end
+    end
+
+    context 'when there are no errors' do
+      let(:errors) { 0 }
+      let(:threshold) { 0 }
+      it { expect(subject.scoped).to be_empty }
+    end
+
+    context 'when there are no documents' do
+      let(:successes) { 0 }
+      let(:errors) { 0 }
+      it { expect(subject.scoped).to be_empty }
+    end
+
+    context 'when there are older errors out of the period' do
+      let(:old_errors) { 2 }
+
+      it 'ignores the older errros' do
+        expect(subject.scoped.count).to eq(1)
+      end
+
+      context 'when passing a bigger period' do
+        let(:period) { 3.days }
+
+        it 'consider the older errros' do
+          expect(subject.scoped.count).to eq(3)
         end
       end
     end
