@@ -34,5 +34,11 @@ describe ActiveRecord::Relation do
         expect(Document.where(status: [:error, :success]).percentage(status: :error)).to eq(0.5)
       end
     end
+
+    context 'when passing a scope name instead of query' do
+      it 'does the math inside the scope' do
+        expect(Document.all.percentage(:with_error)).to eq(0.5)
+      end
+    end
   end
 end
