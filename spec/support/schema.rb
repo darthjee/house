@@ -5,5 +5,4 @@ ActiveRecord::Schema.define do
     t.string :status
     t.timestamps null: true
   end
-
 end
