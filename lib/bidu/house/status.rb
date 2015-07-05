@@ -10,5 +10,8 @@ class Bidu::House::Status
   end
 
   def as_json
+    {
+      status: status
+    }
   end
 end

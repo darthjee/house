@@ -27,8 +27,27 @@ describe Bidu::House::Status do
     let(:status) { status_json[:status] }
 
     context 'when report is ok' do
-      xit 'returns a json with ok' do
+      it 'returns a json with ok' do
+        expect(status).to eq(:ok)
+      end
+    end
 
+    context 'when report is not ok' do
+      let(:errors) { 1 }
+
+      it 'returns a json with error' do
+        expect(status).to eq(:error)
+      end
+    end
+
+    context 'when there are both success and error reports' do
+      let(:success_report) do
+        Bidu::House::ErrorReport.new(report_options.merge(scope: :with_success))
+      end
+      let(:reports) { [ success_report, error_report ] }
+
+      it 'returns a json with error' do
+        expect(status).to eq(:error)
       end
     end
   end
