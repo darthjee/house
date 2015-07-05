@@ -1,6 +1,7 @@
 require 'simplecov'
 SimpleCov.start
 
+require 'bidu/period_parser'
 require 'bidu/house'
 
 require 'active_record'
