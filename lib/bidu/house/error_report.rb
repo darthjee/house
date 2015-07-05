@@ -27,7 +27,7 @@ class Bidu::House::ErrorReport
 
   def as_json
     {
-      documents: scoped.map(&external_key),
+      ids: scoped.map(&external_key),
       percentage: percentage
     }
   end

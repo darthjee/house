@@ -155,7 +155,7 @@ describe Bidu::House::ErrorReport do
       let(:successes) { 1 }
       let(:ids_expected) { [10, 11, 12] }
       let(:expected) do
-        { documents: ids_expected, percentage: 0.75 }
+        { ids: ids_expected, percentage: 0.75 }
       end
 
       it 'returns the external keys and error percentage' do
