@@ -1,7 +1,7 @@
 class Bidu::House::ErrorReport
   include ConcernBuilder::OptionsParser
 
-  delegate :period, :threshold, :scope, :clazz, :external_key, to: :options_object
+  delegate :period, :threshold, :scope, :clazz, :external_key, :id, to: :options_object
 
   def initialize(options)
     @options = {
