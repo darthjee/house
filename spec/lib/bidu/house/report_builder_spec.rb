@@ -52,7 +52,7 @@ describe Bidu::House::ReportBuilder do
     context 'when passing a custom period parameter' do
       let(:parameters) { { threshold: 0.4, period: 10.days } }
 
-      it 'uses custom threshold parameter' do
+      it 'uses custom period parameter' do
         expect(report.error?).to be_truthy
       end
     end

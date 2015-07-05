@@ -1,6 +1,6 @@
 class Bidu::House::StatusBuilder
-  def build(key)
-    Bidu::House::Status.new(reports_for(key))
+  def build(key, parameters = {})
+    Bidu::House::Status.new(reports_for(key, parameters))
   end
 
   def add_report_config(key, config)
@@ -15,8 +15,10 @@ class Bidu::House::StatusBuilder
     @report_builder ||= Bidu::House::ReportBuilder.new
   end
 
-  def reports_for(key)
-    config_for(key).map { |report_key| report_builder.build(report_key) }
+  def reports_for(key, parameters)
+    config_for(key).map do |report_key|
+      report_builder.build(report_key, parameters)
+    end
   end
 
   def configs

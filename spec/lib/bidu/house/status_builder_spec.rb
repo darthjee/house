@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Bidu::House::StatusBuilder do
   let(:errors) { 1 }
   let(:successes) { 3 }
+  let(:old_errors) { 2 }
   let(:key) { :errors }
   let(:threshold) { 0.02 }
   let(:period) { 1.day }
@@ -14,33 +15,62 @@ describe Bidu::House::StatusBuilder do
       scope: :with_error,
       clazz: Document,
       id: :failures,
+      external_key: :external_id,
       to: key
     }
   end
+  let(:parameters) { {} }
+  let(:status) { subject.build(key, parameters) }
   before do
     subject.add_report_config(key, config)
     Document.all.each(&:destroy)
-    successes.times { Document.create status: :success }
-    errors.times { Document.create status: :error }
+    successes.times { |i| Document.create status: :success, external_id: 30+i }
+    errors.times { |i| Document.create status: :error, external_id: 10+i }
+    old_errors.times do |i|
+      Document.create status: :error, external_id: 20+i, created_at: 2.days.ago, updated_at: 2.days.ago
+    end
   end
 
   describe '#build' do
-    let(:ids) { Document.with_error.map(&:id) }
+    let(:ids) { [ 10 ] }
+    let(:status_expected) { :error }
+    let(:percentage) { 0.25 }
     let(:json_expected) do
        {
-         status: :error,
+         status: status_expected,
          failures: {
            ids: ids,
-           percentage: 0.25
+           percentage: percentage
          }
        }
     end
+
     it do
-      expect(subject.build(key)).to be_a(Bidu::House::Status)
+      expect(status).to be_a(Bidu::House::Status)
     end
 
     it 'builds the report using the given configuration' do
-      expect(subject.build(key).as_json).to eq(json_expected)
+      expect(status.as_json).to eq(json_expected)
     end
+
+    context 'when passing a custom threshold parameter' do
+      let(:parameters) { { threshold: 1 } }
+      let(:status_expected) { :ok }
+
+      it 'uses custom threshold parameter' do
+        expect(status.as_json).to eq(json_expected)
+      end
+    end
+
+    context 'when passing a custom period parameter' do
+      let(:ids) { [ 10, 20, 21 ] }
+      let(:percentage) { 0.5 }
+      let(:parameters) { { threshold: 0.4, period: 10.days } }
+
+      it 'uses custom period parameter' do
+        expect(status.as_json).to eq(json_expected)
+      end
+    end
+
   end
 end
