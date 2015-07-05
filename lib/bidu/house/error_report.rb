@@ -1,4 +1,4 @@
-class Bidu::House::Report
+class Bidu::House::ErrorReport
   attr_reader :period, :threshold, :scope, :clazz
 
   def initialize(period, threshold, scope, clazz)
