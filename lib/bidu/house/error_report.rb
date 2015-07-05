@@ -1,7 +1,7 @@
 class Bidu::House::ErrorReport
   include ConcernBuilder::OptionsParser
 
-  delegate :period, :threshold, :scope, :clazz, to: :options_object
+  delegate :period, :threshold, :scope, :clazz, :external_key, to: :options_object
 
   def initialize(options)
     @options = options
@@ -25,7 +25,7 @@ class Bidu::House::ErrorReport
 
   def as_json
     {
-      documents: scoped.map(&:external_id),
+      documents: scoped.map(&external_key),
       percentage: percentage
     }
   end

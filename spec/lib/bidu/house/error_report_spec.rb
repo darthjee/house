@@ -6,19 +6,23 @@ describe Bidu::House::ErrorReport do
   let(:old_errors) { 0 }
   let(:threshold) { 0.02 }
   let(:period) { 1.day }
+  let(:external_key) { :external_id }
   let(:options) do
     {
       period: period,
       threshold: threshold,
       scope: :with_error,
-      clazz: Document
+      clazz: Document,
+      external_key: external_key
     }
   end
   let(:subject) { described_class.new(options) }
   before do
     Document.all.each(&:destroy)
     successes.times { Document.create status: :success }
-    errors.times { |i| Document.create status: :error, external_id: 10 * successes + i }
+    errors.times do |i|
+      Document.create status: :error, external_id: 10 * successes + i, outter_external_id: i
+    end
     old_errors.times { Document.create status: :error, created_at: 2.days.ago, updated_at: 2.days.ago }
   end
 
@@ -149,12 +153,22 @@ describe Bidu::House::ErrorReport do
     context 'when there are 75% erros' do
       let(:errors) { 3 }
       let(:successes) { 1 }
+      let(:ids_expected) { [10, 11, 12] }
       let(:expected) do
-        { documents: [10, 11, 12], percentage: 0.75 }
+        { documents: ids_expected, percentage: 0.75 }
       end
 
       it 'returns the external keys and error percentage' do
         expect(subject.as_json).to eq(expected)
+      end
+
+      context 'when configurated with different external key' do
+        let(:external_key) { :outter_external_id }
+        let(:ids_expected) { [0, 1, 2] }
+
+        it 'returns the external keys and error percentage' do
+          expect(subject.as_json).to eq(expected)
+        end
       end
     end
   end
