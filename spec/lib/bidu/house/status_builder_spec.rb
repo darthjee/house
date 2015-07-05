@@ -16,7 +16,7 @@ describe Bidu::House::StatusBuilder do
       clazz: Document,
       id: :failures,
       external_key: :external_id,
-      to: key
+      on: key
     }
   end
   let(:parameters) { {} }
