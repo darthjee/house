@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Bidu::House::ErrorReport do
   let(:errors) { 1 }
   let(:successes) { 1 }
-  let(:old_errors) { 0 }
+  let(:old_errors) { 2 }
   let(:threshold) { 0.02 }
   let(:period) { 1.day }
   let(:external_key) { :external_id }
@@ -52,8 +52,7 @@ describe Bidu::House::ErrorReport do
     end
 
     context 'when there are older errors out of the period' do
-      let(:old_errors) { 2 }
-      let(:threshold) { 0.5 }
+      let(:threshold) { 0.6 }
 
       it 'ignores the older errros' do
         expect(subject.status).to eq(:ok)
@@ -184,7 +183,7 @@ describe Bidu::House::ErrorReport do
 
       context 'when configurated without external key' do
         before { options.delete(:external_key) }
-        let(:ids_expected) { Document.with_error.map(&:id) }
+        let(:ids_expected) { Document.with_error.where('created_at > ?', 30.hours.ago).map(&:id) }
 
         it 'returns the ids as default id' do
           expect(subject.as_json).to eq(expected)
