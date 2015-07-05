@@ -14,6 +14,7 @@ describe Bidu::House::ReportBuilder do
       threshold: threshold,
       external_key: :external_id,
       scope: :with_error,
+      id: key,
       clazz: Document
     }
   end
@@ -53,6 +54,18 @@ describe Bidu::House::ReportBuilder do
 
       it 'uses custom threshold parameter' do
         expect(report.error?).to be_truthy
+      end
+    end
+
+    context 'when passing a custom other parameters' do
+      let(:parameters) do
+        { scope: :with_success, clazz: Bidu::House::ErrorReport, external_key: :id, id: :failures }
+      end
+
+      it 'ignores the non customizable parameters' do
+        expect(report.as_json).to eq( ids: ids, percentage: 0.25 )
+        expect(report.error?).to be_truthy
+        expect(report.id).to eq(:errors)
       end
     end
   end
