@@ -23,6 +23,13 @@ class Bidu::House::ErrorReport
     percentage > threshold
   end
 
+  def as_json
+    {
+      documents: scoped.map(&:external_id),
+      percentage: percentage
+    }
+  end
+
   private
 
   def last_entires

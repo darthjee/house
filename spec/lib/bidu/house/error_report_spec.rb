@@ -17,8 +17,8 @@ describe Bidu::House::ErrorReport do
   let(:subject) { described_class.new(options) }
   before do
     Document.all.each(&:destroy)
-    errors.times { Document.create status: :error }
     successes.times { Document.create status: :success }
+    errors.times { |i| Document.create status: :error, external_id: 10 * successes + i }
     old_errors.times { Document.create status: :error, created_at: 2.days.ago, updated_at: 2.days.ago }
   end
 
@@ -141,6 +141,20 @@ describe Bidu::House::ErrorReport do
         it 'consider the older errros' do
           expect(subject.scoped.count).to eq(3)
         end
+      end
+    end
+  end
+
+  describe '#as_json' do
+    context 'when there are 75% erros' do
+      let(:errors) { 3 }
+      let(:successes) { 1 }
+      let(:expected) do
+        { documents: [10, 11, 12], percentage: 0.75 }
+      end
+
+      it 'returns the external keys and error percentage' do
+        expect(subject.as_json).to eq(expected)
       end
     end
   end
