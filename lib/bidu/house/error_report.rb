@@ -1,11 +1,10 @@
 class Bidu::House::ErrorReport
-  attr_reader :period, :threshold, :scope, :clazz
+  include ConcernBuilder::OptionsParser
 
-  def initialize(period, threshold, scope, clazz)
-    @period =  period
-    @threshold = threshold
-    @scope = scope
-    @clazz = clazz
+  delegate :period, :threshold, :scope, :clazz, to: :options_object
+
+  def initialize(options)
+    @options = options
   end
 
   def status

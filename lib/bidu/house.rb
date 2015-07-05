@@ -1,4 +1,5 @@
 require 'active_record/relation_ext'
+require 'concern_builder'
 
 module Bidu
   module House

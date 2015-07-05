@@ -6,7 +6,15 @@ describe Bidu::House::ErrorReport do
   let(:old_errors) { 0 }
   let(:threshold) { 0.02 }
   let(:period) { 1.day }
-  let(:subject) { described_class.new(period, threshold, :with_error, Document) }
+  let(:options) do
+    {
+      period: period,
+      threshold: threshold,
+      scope: :with_error,
+      clazz: Document
+    }
+  end
+  let(:subject) { described_class.new(options) }
   before do
     Document.all.each(&:destroy)
     errors.times { Document.create status: :error }
