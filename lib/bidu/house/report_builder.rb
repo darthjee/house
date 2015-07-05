@@ -1,6 +1,6 @@
 class Bidu::House::ReportBuilder
-  def build(key)
-    Bidu::House::ErrorReport.new(configs[key])
+  def build(key, parameters)
+    Bidu::House::ErrorReport.new(configs[key].merge(parameters))
   end
 
   def add_config(key, config)
