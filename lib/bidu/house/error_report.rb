@@ -8,7 +8,7 @@ class Bidu::House::ErrorReport
   end
 
   def status
-    @status ||= (percentage > threshold) ? :error : :ok
+    @status ||= error? ? :error : :ok
   end
 
   def percentage
@@ -17,6 +17,10 @@ class Bidu::House::ErrorReport
 
   def scoped
     @scoped ||= last_entires.public_send(scope)
+  end
+
+  def error?
+    percentage > threshold
   end
 
   private

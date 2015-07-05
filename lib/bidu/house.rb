@@ -6,6 +6,7 @@ module Bidu
     extend ActiveSupport::Concern
 
     require 'bidu/house/error_report'
+    require 'bidu/house/status'
     require 'bidu/house/class_methods'
     require 'bidu/house/class_methods/builder'
   end
