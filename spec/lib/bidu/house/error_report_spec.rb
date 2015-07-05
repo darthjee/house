@@ -149,6 +149,17 @@ describe Bidu::House::ErrorReport do
     end
   end
 
+  describe '#error?' do
+    context 'when errors percentage overcames threshold' do
+      it { expect(subject.error?).to be_truthy }
+    end
+
+    context 'when errors percentage does not overcames threshold' do
+      let(:errors) { 0 }
+      it { expect(subject.error?).to be_falsey }
+    end
+  end
+
   describe '#as_json' do
     context 'when there are 75% erros' do
       let(:errors) { 3 }
