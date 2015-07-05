@@ -166,7 +166,16 @@ describe Bidu::House::ErrorReport do
         let(:external_key) { :outter_external_id }
         let(:ids_expected) { [0, 1, 2] }
 
-        it 'returns the external keys and error percentage' do
+        it 'returns the correct external keys' do
+          expect(subject.as_json).to eq(expected)
+        end
+      end
+
+      context 'when configurated without external key' do
+        before { options.delete(:external_key) }
+        let(:ids_expected) { Document.with_error.map(&:id) }
+
+        it 'returns the ids as default id' do
           expect(subject.as_json).to eq(expected)
         end
       end

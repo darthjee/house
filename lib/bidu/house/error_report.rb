@@ -4,7 +4,9 @@ class Bidu::House::ErrorReport
   delegate :period, :threshold, :scope, :clazz, :external_key, to: :options_object
 
   def initialize(options)
-    @options = options
+    @options = {
+      external_key: :id
+    }.merge(options)
   end
 
   def status
