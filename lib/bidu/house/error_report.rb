@@ -4,7 +4,7 @@ class Bidu::House::ErrorReport
   attr_reader :json
 
   json_parse :threshold, type: :float
-  json_parse :period, type: :integer
+  json_parse :period, type: :period
   json_parse :scope, :id, :clazz, :external_key, case: :snake
 
   def initialize(options)

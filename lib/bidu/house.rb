@@ -7,6 +7,7 @@ module Bidu
   module House
     extend ActiveSupport::Concern
 
+    require 'json_parser/type_cast_ext'
     require 'bidu/house/error_report'
     require 'bidu/house/status'
     require 'bidu/house/report_builder'
