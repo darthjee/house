@@ -4,7 +4,7 @@ class Bidu::House::StatusBuilder
   end
 
   def add_report_config(key, config)
-    status_key = config.delete(:on)
+    status_key = config.delete(:on) || :default
     report_builder.add_config(key, config)
     config_for(status_key) << key
   end

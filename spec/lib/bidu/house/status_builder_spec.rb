@@ -49,6 +49,14 @@ describe Bidu::House::StatusBuilder do
       expect(status).to be_a(Bidu::House::Status)
     end
 
+    context 'when not specifying where to report' do
+      let(:key) {}
+
+      it 'register report under default' do
+        expect(subject.build(:default).as_json).to eq(json_expected)
+      end
+    end
+
     it 'builds the report using the given configuration' do
       expect(status.as_json).to eq(json_expected)
     end
@@ -71,6 +79,5 @@ describe Bidu::House::StatusBuilder do
         expect(status.as_json).to eq(json_expected)
       end
     end
-
   end
 end
