@@ -4,7 +4,6 @@ module Bidu::House::ClassMethods
     options = {
     }.merge(attr_names.extract_options!)
 
-    builder = Builder.new(attr_names, self, options)
-    builder.build
+    self.status_builder.add_report_config(attr_names.first, options)
   end
 end

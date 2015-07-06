@@ -1,13 +1,13 @@
 require 'active_record/relation_ext'
 require 'concern_builder'
 require 'bidu/core_ext'
+require 'bidu/period_parser'
 require 'json_parser'
+require 'json_parser/type_cast_ext'
 
 module Bidu
   module House
-    extend ActiveSupport::Concern
-
-    require 'json_parser/type_cast_ext'
+    require 'bidu/house/concern'
     require 'bidu/house/error_report'
     require 'bidu/house/status'
     require 'bidu/house/report_builder'
