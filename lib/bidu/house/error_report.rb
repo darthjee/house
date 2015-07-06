@@ -36,7 +36,7 @@ module Bidu
 
       def as_json
         {
-          ids: scoped.map(&external_key),
+          ids: scoped.pluck(external_key),
           percentage: percentage
         }
       end
