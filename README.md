@@ -44,14 +44,14 @@ with error and render the report
   ```
 
 3. Set the correct options on your status report to achieve a perfect report
- - clazz: Class of the object that might contain error
- - scope: scope to be fetched when trying to find objects with error (default: :with_error)
- - external_key: column to be exposed as id for the objects with error
- - threshold: default report threshold (default: 0.02)
- - period: default search period (default: 1 day)
- - on: report bucket (default: :default)
+- clazz: Class of the object that might contain error
+- scope: scope to be fetched when trying to find objects with error (default: :with_error)
+- external_key: column to be exposed as id for the objects with error
+- threshold: default report threshold (default: 0.02)
+- period: default search period (default: 1 day)
+- on: report bucket (default: :default)
 
- 4. Run the server and hit the health-check routes
+4. Run the server and hit the health-check routes
 
  ```
  wget http://localhost:3000/health-check/status
