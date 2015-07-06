@@ -21,14 +21,15 @@ with error and render the report
     include Bidu::House
 
     status_report :failures, clazz: Document
-    status_report :failures, clazz: Schedules, scope: :late, on: :late
+    status_report :failures, clazz: Schedules, on: :schedules
+    status_report :delays, clazz: Schedules, scope: :late, on: :schedules
 
     def status
-      render_status(:default)
+      render_status
     end
 
     def late_status
-      render_status(:late)
+      render_status(:schedules)
     end
   end
   ```
