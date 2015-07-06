@@ -13,6 +13,5 @@ module Bidu
     require 'bidu/house/report_builder'
     require 'bidu/house/status_builder'
     require 'bidu/house/class_methods'
-    require 'bidu/house/class_methods/builder'
   end
 end
