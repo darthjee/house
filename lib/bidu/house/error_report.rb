@@ -11,7 +11,8 @@ class Bidu::House::ErrorReport
     @json = {
       external_key: :id,
       threshold: 0.02,
-      period: 1.day
+      period: 1.day,
+      scope: :with_error
     }.merge(options)
   end
 
