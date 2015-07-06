@@ -18,4 +18,10 @@ describe Bidu::PeriodParser do
     '3months' => 3.months,
     '3years' => 3.years
   }
+
+  context 'when value is already a period' do
+    it 'returns the value itself' do
+      expect(described_class.parse(3.minutes)).to eq(3.minutes)
+    end
+  end
 end

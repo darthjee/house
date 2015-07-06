@@ -2,6 +2,7 @@ class Bidu::PeriodParser
   class << self
     def parse(period)
       return unless period
+      return period if period.is_a?(Integer)
       new(period).to_seconds
     end
   end
