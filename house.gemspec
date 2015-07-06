@@ -18,6 +18,12 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_runtime_dependency 'activesupport'
+  gem.add_runtime_dependency 'concern_builder'
+  gem.add_runtime_dependency 'bidu-core_ext'
+  gem.add_runtime_dependency 'json_parser', '~> 1.1'
+
+  gem.add_development_dependency "activerecord"
+  gem.add_development_dependency "sqlite3"
 
   gem.add_development_dependency "bundler", "~> 1.6"
   gem.add_development_dependency "rake"

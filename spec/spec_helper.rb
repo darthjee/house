@@ -3,6 +3,9 @@ SimpleCov.start
 
 require 'bidu/house'
 
+require 'active_record'
+ActiveRecord::Base.establish_connection(adapter: "sqlite3", database: ":memory:")
+
 support_files = File.expand_path("spec/support/**/*.rb")
 Dir[support_files].each { |file| require file  }
 
