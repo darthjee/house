@@ -1,15 +1,19 @@
-module Bidu::House::ClassMethods
+module Bidu
+  module House
+    module ClassMethods
 
-  def status_report(*attr_names)
-    id = attr_names.first
-    options = {
-      id: id
-    }.merge(attr_names.extract_options!)
+      def status_report(*attr_names)
+        id = attr_names.first
+        options = {
+          id: id
+        }.merge(attr_names.extract_options!)
 
-    self.status_builder.add_report_config(id, options)
-  end
+        self.status_builder.add_report_config(id, options)
+      end
 
-  def status_builder
-    @status_builder ||= Bidu::House::StatusBuilder.new
+      def status_builder
+        @status_builder ||= Bidu::House::StatusBuilder.new
+      end
+    end
   end
 end
