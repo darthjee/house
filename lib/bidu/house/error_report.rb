@@ -5,7 +5,9 @@ class Bidu::House::ErrorReport
 
   def initialize(options)
     @options = {
-      external_key: :id
+      external_key: :id,
+      threshold: 0.02,
+      period: 1.day
     }.merge(options)
   end
 
