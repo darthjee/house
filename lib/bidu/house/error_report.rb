@@ -1,10 +1,14 @@
 class Bidu::House::ErrorReport
-  include ConcernBuilder::OptionsParser
+  include JsonParser
 
-  delegate :period, :threshold, :scope, :clazz, :external_key, :id, to: :options_object
+  attr_reader :json
+
+  json_parse :threshold, type: :float
+  json_parse :period, type: :integer
+  json_parse :scope, :id, :clazz, :external_key, case: :snake
 
   def initialize(options)
-    @options = {
+    @json = {
       external_key: :id,
       threshold: 0.02,
       period: 1.day
