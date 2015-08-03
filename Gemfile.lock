@@ -3,7 +3,7 @@ PATH
   specs:
     bidu-house (0.1.2)
       activesupport
-      bidu-core_ext
+      bidu-active_ext
       concern_builder
       json_parser (~> 1.1)
 
@@ -24,6 +24,9 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.0)
+    bidu-active_ext (1.0.0)
+      activesupport
+      bidu-core_ext
     bidu-core_ext (1.0.0)
       activesupport
     builder (3.2.2)
