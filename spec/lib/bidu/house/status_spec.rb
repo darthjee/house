@@ -20,9 +20,9 @@ describe Bidu::House::Status do
   end
   let(:errors) { 0 }
   let(:successes) { 1 }
-  let(:error_report) { Bidu::House::ErrorReport.new(report_options) }
+  let(:error_report) { Bidu::House::Report::Error.new(report_options) }
   let(:success_report) do
-    Bidu::House::ErrorReport.new(success_options)
+    Bidu::House::Report::Error.new(success_options)
   end
   let(:reports) { [ error_report ] }
   let(:subject) { described_class.new(reports) }
@@ -56,7 +56,7 @@ describe Bidu::House::Status do
 
     context 'when there are both success and error reports' do
       let(:success_report) do
-        Bidu::House::ErrorReport.new(report_options.merge(scope: :with_success))
+        Bidu::House::Report::Error.new(report_options.merge(scope: :with_success))
       end
       let(:reports) { [ success_report, error_report ] }
 
