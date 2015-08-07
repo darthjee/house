@@ -4,6 +4,8 @@ module Bidu
       class Error
         include JsonParser
 
+        ALLOWED_PARAMETERS=[:period, :threshold]
+
         attr_reader :json
 
         json_parse :threshold, type: :float
