@@ -3,8 +3,7 @@ module Bidu
     class ReportBuilder
       def build(key, parameters = {})
         config = config_for(key)
-        params = slice_parameters_for(key, parameters)
-        report_class(key).new(config.merge(params))
+        config.build(parameters)
       end
 
       def add_config(key, config)
@@ -13,16 +12,8 @@ module Bidu
 
       private
 
-      def slice_parameters_for(key, parameters)
-        config_for(key).slice_parameters(parameters)
-      end
-
       def config_for(key)
         configs[key]
-      end
-
-      def report_class(key)
-        config_for(key).report_class
       end
 
       def configs
