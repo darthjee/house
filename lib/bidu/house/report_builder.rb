@@ -4,12 +4,12 @@ module Bidu
       def build(key, parameters = {})
         config = config_for(key)
         type = config[:type] || :error
-        params = slice_parameters_for(type, parameters)
-        report_class(type).new(config.merge(params))
+        params = slice_parameters_for(key, parameters)
+        report_class(key).new(config.merge(params))
       end
 
       def add_config(key, config)
-        configs[key] = config
+        configs[key] = Bidu::House::Config.new(config)
       end
 
       private
@@ -19,15 +19,15 @@ module Bidu
       end
 
       def allowed_parameters_keys_for(key)
-        report_class(key)::ALLOWED_PARAMETERS
+        config_for(key).report_class::ALLOWED_PARAMETERS
       end
 
       def config_for(key)
         configs[key]
       end
 
-      def report_class(type)
-        Bidu::House::Report.const_get(type.to_s.camelize)
+      def report_class(key)
+        config_for(key).report_class
       end
 
       def configs
