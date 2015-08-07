@@ -19,7 +19,7 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency 'activesupport'
   gem.add_runtime_dependency 'concern_builder'
-  gem.add_runtime_dependency 'bidu-core_ext'
+  gem.add_runtime_dependency 'bidu-active_ext'
   gem.add_runtime_dependency 'json_parser', '~> 1.1'
 
   gem.add_development_dependency "activerecord"
