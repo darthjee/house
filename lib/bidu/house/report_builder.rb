@@ -4,7 +4,7 @@ module Bidu
       def build(key, parameters = {})
         params = parameters.slice(:period, :threshold)
         config = configs[key].merge(params)
-        Bidu::House::Report.build(:error, config)
+        report_class(:error).new(config)
       end
 
       def add_config(key, config)
@@ -12,6 +12,10 @@ module Bidu
       end
 
       private
+
+      def report_class(type)
+        Bidu::House::Report.const_get(type.to_s.camelize)
+      end
 
       def configs
         @configs ||= {}
