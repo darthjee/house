@@ -4,7 +4,7 @@ module Bidu
       def build(key, parameters = {})
         params = parameters.slice(:period, :threshold)
         config = configs[key].merge(params)
-        Bidu::House::Report::Error.new(config)
+        Bidu::House::Report.build(:error, config)
       end
 
       def add_config(key, config)
