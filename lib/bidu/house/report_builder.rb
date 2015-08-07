@@ -3,7 +3,6 @@ module Bidu
     class ReportBuilder
       def build(key, parameters = {})
         config = config_for(key)
-        type = config[:type] || :error
         params = slice_parameters_for(key, parameters)
         report_class(key).new(config.merge(params))
       end
