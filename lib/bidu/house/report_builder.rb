@@ -7,7 +7,7 @@ module Bidu
       end
 
       def add_config(key, config)
-        configs[key] = Bidu::House::Config.new(config)
+        configs[key] = Bidu::House::ReportConfig.new(config)
       end
 
       private

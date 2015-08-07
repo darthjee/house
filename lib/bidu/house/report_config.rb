@@ -1,6 +1,6 @@
 module Bidu
   module House
-    class Config
+    class ReportConfig
       attr_accessor :config
 
       delegate :[], :[]=, :merge, to: :config
