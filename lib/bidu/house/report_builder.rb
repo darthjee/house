@@ -15,11 +15,7 @@ module Bidu
       private
 
       def slice_parameters_for(key, parameters)
-        parameters.slice(*allowed_parameters_keys_for(key))
-      end
-
-      def allowed_parameters_keys_for(key)
-        config_for(key).report_class::ALLOWED_PARAMETERS
+        config_for(key).slice_parameters(parameters)
       end
 
       def config_for(key)
