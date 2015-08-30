@@ -6,10 +6,10 @@ report and making it avaliable in a controller
 
 Getting started
 ---------------
-1. Add JsonParser to your `Gemfile` and `bundle install`:
+1. Add House to your `Gemfile` and `bundle install`:
 
     ```ruby
-    gem 'json_parser'
+    gem 'bidu-house'
     ```
 
 
