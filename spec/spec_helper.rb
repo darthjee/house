@@ -5,6 +5,7 @@ end
 
 SimpleCov.start 'gem'
 
+require 'pry-nav'
 require 'bidu/house'
 
 require 'active_record'
