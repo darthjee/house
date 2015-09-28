@@ -14,6 +14,8 @@ module Bidu
         report_class.new(config.merge(params))
       end
 
+      private
+
       def type
         self[:type] ||= :error
       end
