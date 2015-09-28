@@ -9,5 +9,13 @@ describe Bidu::House::ReportConfig do
         expect(subject.build(parameters)).to be_a(Bidu::House::Report::Error)
       end
     end
+
+    context 'when a dummy type is given' do
+      let(:config) { { type: :dummy } }
+
+      it do
+        expect(subject.build(parameters)).to be_a(Bidu::House::Report::Dummy)
+      end
+    end
   end
 end
