@@ -9,3 +9,9 @@ module Bidu
     end
   end
 end
+
+class Dummy
+  ALLOWED_PARAMETERS=[:period, :threshold]
+  def initialize(options)
+  end
+end

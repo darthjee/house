@@ -24,7 +24,15 @@ describe Bidu::House::ReportConfig do
       let(:config) { { type: Bidu::House::Report::Dummy } }
 
       it do
-        expect(subject.build(parameters)).to be_a(Bidu::House::Report::Error)
+        expect(subject.build(parameters)).to be_a(Bidu::House::Report::Dummy)
+      end
+    end
+
+    context 'when a global class is given as type' do
+      let(:config) { { type: Dummy } }
+
+      it do
+        expect(subject.build(parameters)).to be_a(Dummy)
       end
     end
   end

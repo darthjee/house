@@ -21,6 +21,7 @@ module Bidu
       end
 
       def report_class
+        return type if type.is_a?(Class)
         @report_class ||= Bidu::House::Report.const_get(type.to_s.camelize)
       end
 
