@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 describe Bidu::House::ReportConfig do
   let(:config) { {} }
   let(:parameters) { {} }
@@ -15,6 +17,14 @@ describe Bidu::House::ReportConfig do
 
       it do
         expect(subject.build(parameters)).to be_a(Bidu::House::Report::Dummy)
+      end
+    end
+
+    context 'when a class is given as type' do
+      let(:config) { { type: Bidu::House::Report::Dummy } }
+
+      it do
+        expect(subject.build(parameters)).to be_a(Bidu::House::Report::Error)
       end
     end
   end
