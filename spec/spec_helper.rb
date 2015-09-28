@@ -1,5 +1,9 @@
 require 'simplecov'
-SimpleCov.start
+SimpleCov.profiles.define 'gem' do
+  add_filter '/spec/'
+end
+
+SimpleCov.start 'gem'
 
 require 'bidu/house'
 
