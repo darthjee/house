@@ -1,29 +1,35 @@
 require 'spec_helper'
 
-describe Bidu::House::ErrorReport do
+describe Bidu::House::Report::Error do
   let(:errors) { 1 }
   let(:successes) { 1 }
   let(:old_errors) { 2 }
   let(:threshold) { 0.02 }
   let(:period) { 1.day }
   let(:external_key) { :external_id }
+  let(:scope) { :with_error }
   let(:options) do
     {
       period: period,
       threshold: threshold,
-      scope: :with_error,
+      scope: scope,
       clazz: Document,
       external_key: external_key
     }
   end
   let(:subject) { described_class.new(options) }
+  let(:types) { [:a] }
   before do
     Document.all.each(&:destroy)
-    successes.times { Document.create status: :success }
-    errors.times do |i|
-      Document.create status: :error, external_id: 10 * successes + i, outter_external_id: i
+    types.each do |type|
+      successes.times { Document.create status: :success, doc_type: type }
+      errors.times do |i|
+        Document.create status: :error, external_id: 10 * successes + i, outter_external_id: i, doc_type: type
+      end
+      old_errors.times do
+        Document.create status: :error, created_at: 2.days.ago, updated_at: 2.days.ago, doc_type: type
+      end
     end
-    old_errors.times { Document.create status: :error, created_at: 2.days.ago, updated_at: 2.days.ago }
   end
 
   describe '#status' do
@@ -145,6 +151,18 @@ describe Bidu::House::ErrorReport do
           expect(subject.scoped.count).to eq(3)
         end
       end
+    end
+
+    context 'when configured with multiple scopes' do
+      let(:types) { [:a, :b, :b] }
+      let(:old_errors) { 0 }
+      let(:scope) { :'with_error.type_b' }
+
+      it 'fetches from each scope in order' do
+        expect(subject.scoped.count).to eq(Document.with_error.type_b.count)
+        expect(subject.scoped.count).to eq(2 * Document.with_error.type_a.count)
+      end
+
     end
   end
 
