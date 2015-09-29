@@ -48,24 +48,24 @@ module Bidu
 
         def fetch_percentage
           if (scope.is_a?(String))
-            last_entires.percentage(scope)
+            last_entries.percentage(scope)
           else
-            last_entires.percentage(*(scope.to_s.split('.').map(&:to_sym)))
+            last_entries.percentage(*(scope.to_s.split('.').map(&:to_sym)))
           end
         end
 
         def fetch_scoped
           if (scope.is_a?(Symbol))
-            scope.to_s.split('.').inject(last_entires) do |entries, method|
+            scope.to_s.split('.').inject(last_entries) do |entries, method|
               entries.public_send(method)
             end
           else
-            last_entires.where(scope)
+            last_entries.where(scope)
           end
         end
 
-        def last_entires
-          @last_entires ||= clazz.where('updated_at >= ?', period.seconds.ago)
+        def last_entries
+          @last_entries ||= clazz.where('updated_at >= ?', period.seconds.ago)
         end
       end
     end
