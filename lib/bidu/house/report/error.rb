@@ -55,8 +55,12 @@ module Bidu
         end
 
         def fetch_scoped
-          scope.to_s.split('.').inject(last_entires) do |entries, method|
-            entries.public_send(method)
+          if (scope.is_a?(Symbol))
+            scope.to_s.split('.').inject(last_entires) do |entries, method|
+              entries.public_send(method)
+            end
+          else
+            last_entires.where(scope)
           end
         end
 
