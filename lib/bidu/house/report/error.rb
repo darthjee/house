@@ -30,7 +30,7 @@ module Bidu
         end
 
         def scoped
-          @scoped ||= last_entires.public_send(scope)
+          @scoped ||= fetch_scoped
         end
 
         def error?
@@ -45,6 +45,12 @@ module Bidu
         end
 
         private
+
+        def fetch_scoped
+          scope.to_s.split('.').inject(last_entires) do |entries, method|
+            entries.public_send(method)
+          end
+        end
 
         def last_entires
           @last_entires ||= clazz.where('updated_at >= ?', period.seconds.ago)
