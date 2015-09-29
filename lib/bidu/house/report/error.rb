@@ -26,7 +26,7 @@ module Bidu
         end
 
         def percentage
-          @percentage ||= last_entires.percentage(scope)
+          @percentage ||= fetch_percentage
         end
 
         def scoped
@@ -45,6 +45,14 @@ module Bidu
         end
 
         private
+
+        def fetch_percentage
+          if (scope.is_a?(String))
+            last_entires.percentage(scope)
+          else
+            last_entires.percentage(*(scope.to_s.split('.').map(&:to_sym)))
+          end
+        end
 
         def fetch_scoped
           scope.to_s.split('.').inject(last_entires) do |entries, method|
