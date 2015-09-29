@@ -117,39 +117,34 @@ describe Bidu::House::Report::Error do
       end
     end
 
-    context 'when configured with multiple scopes' do
+    context 'when configuring with a complex scope' do
       let(:types) { [:a, :b] }
       let(:old_errors) { 0 }
       let(:scope) { :'with_error.type_b' }
       let(:errors) { 1 }
       let(:successes) { 3 }
+      context 'as symbol' do
+        let(:scope) { :'with_error.type_b' }
 
-      it 'fetches from each scope in order' do
-        expect(subject.percentage).to eq(0.125)
+        it 'fetches from each scope in order' do
+          expect(subject.percentage).to eq(0.125)
+        end
       end
-    end
 
-    context 'when using a string where scope' do
-      let(:types) { [:a, :b] }
-      let(:old_errors) { 0 }
-      let(:scope) { "status = 'error' and doc_type = 'b'" }
-      let(:errors) { 1 }
-      let(:successes) { 3 }
+      context 'as string where scope' do
+        let(:scope) { "status = 'error' and doc_type = 'b'" }
 
-      it 'fetches from each scope in order' do
-        expect(subject.percentage).to eq(0.125)
+        it 'fetches from each scope in order' do
+          expect(subject.percentage).to eq(0.125)
+        end
       end
-    end
 
-    context 'when using a hash where scope' do
-      let(:types) { [:a, :b] }
-      let(:old_errors) { 0 }
-      let(:scope) { { status: :error, doc_type: :b } }
-      let(:errors) { 1 }
-      let(:successes) { 3 }
+      context 'as hash where scope' do
+        let(:scope) { { status: :error, doc_type: :b } }
 
-      it 'fetches from each scope in order' do
-        expect(subject.percentage).to eq(0.125)
+        it 'fetches from each scope in order' do
+          expect(subject.percentage).to eq(0.125)
+        end
       end
     end
 
@@ -222,36 +217,35 @@ describe Bidu::House::Report::Error do
       end
     end
 
-    context 'when configured with multiple scopes' do
+    context 'when configured with a complex scope' do
       let(:types) { [:a, :b, :b] }
       let(:old_errors) { 0 }
-      let(:scope) { :'with_error.type_b' }
 
-      it 'fetches from each scope in order' do
-        expect(subject.scoped.count).to eq(Document.with_error.type_b.count)
-        expect(subject.scoped.count).to eq(2 * Document.with_error.type_a.count)
+      context 'as symbol' do
+        let(:scope) { :'with_error.type_b' }
+
+        it 'fetches from each scope in order' do
+          expect(subject.scoped.count).to eq(Document.with_error.type_b.count)
+          expect(subject.scoped.count).to eq(2 * Document.with_error.type_a.count)
+        end
       end
-    end
 
-    context 'when passing a hash for scope' do
-      let(:types) { [:a, :b, :b] }
-      let(:old_errors) { 0 }
-      let(:scope) { { status: :error, doc_type: :b } }
+      context 'as hash' do
+        let(:scope) { { status: :error, doc_type: :b } }
 
-      it 'fetches from each scope in order' do
-        expect(subject.scoped.count).to eq(Document.with_error.type_b.count)
-        expect(subject.scoped.count).to eq(2 * Document.with_error.type_a.count)
+        it 'fetches from each scope in order' do
+          expect(subject.scoped.count).to eq(Document.with_error.type_b.count)
+          expect(subject.scoped.count).to eq(2 * Document.with_error.type_a.count)
+        end
       end
-    end
 
-    context 'when using a string where scope' do
-      let(:types) { [:a, :b, :b] }
-      let(:old_errors) { 0 }
-      let(:scope) { "status = 'error' and doc_type = 'b'" }
+      context 'as string where scope' do
+        let(:scope) { "status = 'error' and doc_type = 'b'" }
 
-      it 'fetches from each scope in order' do
-        expect(subject.scoped.count).to eq(Document.with_error.type_b.count)
-        expect(subject.scoped.count).to eq(2 * Document.with_error.type_a.count)
+        it 'fetches from each scope in order' do
+          expect(subject.scoped.count).to eq(Document.with_error.type_b.count)
+          expect(subject.scoped.count).to eq(2 * Document.with_error.type_a.count)
+        end
       end
     end
 
