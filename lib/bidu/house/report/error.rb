@@ -47,10 +47,10 @@ module Bidu
         private
 
         def fetch_percentage
-          if (scope.is_a?(String))
-            last_entries.percentage(scope)
-          else
+          if (scope.is_a?(Symbol))
             last_entries.percentage(*(scope.to_s.split('.').map(&:to_sym)))
+          else
+            last_entries.percentage(scope)
           end
         end
 

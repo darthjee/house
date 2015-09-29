@@ -138,6 +138,18 @@ describe Bidu::House::Report::Error do
         expect(subject.percentage).to eq(0.125)
       end
     end
+
+    context 'when using a hash where scope' do
+      let(:types) { [:a, :b] }
+      let(:old_errors) { 0 }
+      let(:scope) { { status: :error, doc_type: :b } }
+      let(:errors) { 1 }
+      let(:successes) { 3 }
+
+      it 'fetches from each scope in order' do
+        expect(subject.percentage).to eq(0.125)
+      end
+    end
   end
 
   describe '#scoped' do
@@ -188,6 +200,16 @@ describe Bidu::House::Report::Error do
       end
     end
 
+    context 'when passing a hash for scope' do
+      let(:types) { [:a, :b, :b] }
+      let(:old_errors) { 0 }
+      let(:scope) { { status: :error, doc_type: :b } }
+
+      it 'fetches from each scope in order' do
+        expect(subject.scoped.count).to eq(Document.with_error.type_b.count)
+        expect(subject.scoped.count).to eq(2 * Document.with_error.type_a.count)
+      end
+    end
 
     context 'when using a string where scope' do
       let(:types) { [:a, :b, :b] }
