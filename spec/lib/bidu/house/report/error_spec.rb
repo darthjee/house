@@ -8,11 +8,13 @@ describe Bidu::House::Report::Error do
   let(:period) { 1.day }
   let(:external_key) { :external_id }
   let(:scope) { :with_error }
+  let(:base_scope) { :all }
   let(:options) do
     {
       period: period,
       threshold: threshold,
       scope: scope,
+      base_scope: base_scope,
       clazz: Document,
       external_key: external_key
     }
@@ -150,6 +152,37 @@ describe Bidu::House::Report::Error do
         expect(subject.percentage).to eq(0.125)
       end
     end
+
+    context 'when using a base scope' do
+      let(:types) { [:a, :b, :b, :b] }
+      let(:old_errors) { 0 }
+      let(:errors) { 1 }
+      let(:successes) { 3 }
+
+      context 'as symbol' do
+        let(:base_scope) { :type_b }
+
+        it 'fetches from each scope in order' do
+          expect(subject.percentage).to eq(0.25)
+        end
+      end
+
+      context 'as where clause' do
+        let(:base_scope) { "doc_type = 'b'" }
+
+        it 'fetches from each scope in order' do
+          expect(subject.percentage).to eq(0.25)
+        end
+      end
+
+      context 'as hash' do
+        let(:base_scope) { { doc_type: :b } }
+
+        it 'fetches from each scope in order' do
+          expect(subject.percentage).to eq(0.25)
+        end
+      end
+    end
   end
 
   describe '#scoped' do
@@ -219,6 +252,38 @@ describe Bidu::House::Report::Error do
       it 'fetches from each scope in order' do
         expect(subject.scoped.count).to eq(Document.with_error.type_b.count)
         expect(subject.scoped.count).to eq(2 * Document.with_error.type_a.count)
+      end
+    end
+
+    context 'when using a base scope' do
+      let(:types) { [:a, :b, :b, :b] }
+      let(:old_errors) { 0 }
+
+      context 'as symbol' do
+        let(:base_scope) { :type_b }
+
+        it 'fetches from each scope in order' do
+          expect(subject.scoped.count).to eq(Document.with_error.type_b.count)
+          expect(subject.scoped.count).to eq(3 * Document.with_error.type_a.count)
+        end
+      end
+
+      context 'as where clause' do
+        let(:base_scope) { "doc_type = 'b'" }
+
+        it 'fetches from each scope in order' do
+          expect(subject.scoped.count).to eq(Document.with_error.type_b.count)
+          expect(subject.scoped.count).to eq(3 * Document.with_error.type_a.count)
+        end
+      end
+
+      context 'as hash' do
+        let(:base_scope) { { doc_type: :b } }
+
+        it 'fetches from each scope in order' do
+          expect(subject.scoped.count).to eq(Document.with_error.type_b.count)
+          expect(subject.scoped.count).to eq(3 * Document.with_error.type_a.count)
+        end
       end
     end
   end
