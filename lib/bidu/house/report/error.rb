@@ -35,13 +35,18 @@ module Bidu
         end
 
         def error?
-          percentage > threshold
+          @error ||= percentage > threshold
+        end
+
+        def status
+          error? ? :error : :ok
         end
 
         def as_json
           {
             ids: scoped.pluck(external_key),
-            percentage: percentage
+            percentage: percentage,
+            status: status
           }
         end
 

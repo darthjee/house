@@ -37,7 +37,7 @@ describe Bidu::House::ReportBuilder do
     end
 
     it 'builds the report using the given configuration' do
-      expect(report.as_json).to eq( ids: ids, percentage: 0.25 )
+      expect(report.as_json).to eq( ids: ids, percentage: 0.25, status: :error )
       expect(report.error?).to be_truthy
     end
 
@@ -50,7 +50,7 @@ describe Bidu::House::ReportBuilder do
     end
 
     context 'when passing a custom period parameter' do
-      let(:parameters) { { threshold: 0.4, period: 10.days } }
+      let(:parameters) { { threshold: 0.4, period: 10.days, status: :error } }
 
       it 'uses custom period parameter' do
         expect(report.error?).to be_truthy
@@ -63,7 +63,7 @@ describe Bidu::House::ReportBuilder do
       end
 
       it 'ignores the non customizable parameters' do
-        expect(report.as_json).to eq( ids: ids, percentage: 0.25 )
+        expect(report.as_json).to eq( ids: ids, percentage: 0.25, status: :error )
         expect(report.error?).to be_truthy
         expect(report.id).to eq(:errors)
       end

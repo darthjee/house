@@ -98,7 +98,8 @@ describe Bidu::House::Status do
         status: :error,
         errors: {
           ids: ids,
-          percentage: 0.75
+          percentage: 0.75,
+          status: :error
         }
       }
     end
@@ -114,11 +115,13 @@ describe Bidu::House::Status do
           status: :error,
           errors: {
             ids: ids,
-            percentage: 0.75
+            percentage: 0.75,
+            status: :error
           },
           success: {
             ids: success_ids,
-            percentage: 0.25
+            percentage: 0.25,
+            status: :error
           }
         }
       end

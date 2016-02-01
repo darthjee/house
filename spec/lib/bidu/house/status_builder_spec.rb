@@ -40,7 +40,8 @@ describe Bidu::House::StatusBuilder do
          status: status_expected,
          failures: {
            ids: ids,
-           percentage: percentage
+           percentage: percentage,
+           status: status_expected
          }
        }
     end
