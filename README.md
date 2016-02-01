@@ -63,3 +63,20 @@ with error and render the report
  wget http://localhost:3000/health-check/status?period=3.days&threshold=0.005
  wget http://localhost:3000/health-check/late-status?period=1.hours&threshold=0.1
  ```
+
+ 6. Use the status json to understand what is wrong
+ ```json
+ {
+   "status": "error",
+   "failures": {
+     "ids": [10, 14],
+     "percentage": 0.5,
+     "status": "error"
+   },
+   "delays": {
+     "ids": [12],
+     "percentage": 0.001,
+     "status": "ok"
+   }
+ }
+ ```
