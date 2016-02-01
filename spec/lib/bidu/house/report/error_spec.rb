@@ -294,15 +294,32 @@ describe Bidu::House::Report::Error do
   end
 
   describe '#as_json' do
+    let(:expected) do
+      { ids: ids_expected, percentage: percentage_expected, status: status_expected }
+    end
+
+    context 'when everything is ok' do
+      let(:errors) { 1 }
+      let(:successes) { 9 }
+      let(:ids_expected) { [90] }
+      let(:status_expected) { :ok }
+      let(:percentage_expected) { 0.1 }
+      let(:threshold) { 0.5 }
+
+      it 'returns the external keys, status and error percentage' do
+        expect(subject.as_json).to eq(expected)
+      end
+
+    end
+
     context 'when there are 75% erros' do
+      let(:status_expected) { :error }
+      let(:percentage_expected) { 0.75 }
       let(:errors) { 3 }
       let(:successes) { 1 }
       let(:ids_expected) { [10, 11, 12] }
-      let(:expected) do
-        { ids: ids_expected, percentage: 0.75, status: :error }
-      end
 
-      it 'returns the external keys and error percentage' do
+      it 'returns the external keys, status and error percentage' do
         expect(subject.as_json).to eq(expected)
       end
 
