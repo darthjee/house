@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bidu-house (0.1.2)
+    bidu-house (0.2.1)
       activesupport
       bidu-active_ext
       concern_builder
@@ -27,11 +27,11 @@ GEM
     bidu-active_ext (1.0.0)
       activesupport
       bidu-core_ext
-    bidu-core_ext (1.0.0)
+    bidu-core_ext (1.2.1)
       activesupport
     builder (3.2.2)
     coderay (1.1.0)
-    concern_builder (0.0.1)
+    concern_builder (0.0.2)
       activesupport
     diff-lcs (1.2.5)
     docile (1.1.5)
