@@ -9,7 +9,7 @@ module Bidu
       attr_reader :json
 
       def initialize(options)
-        @json = self.class::DEFAULT_OPTION.merge(options)
+        @json = DEFAULT_OPTION.merge(options)
       end
 
       def status

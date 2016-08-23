@@ -16,6 +16,10 @@ module Bidu
         json_parse :period, type: :period
         json_parse :scope, :id, :clazz, :base_scope, :external_key, :uniq, :limit, case: :snake
 
+        def initialize(options)
+          super(DEFAULT_OPTION.merge(options))
+        end
+
         def percentage
           @percentage ||= fetch_percentage
         end
