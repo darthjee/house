@@ -50,6 +50,9 @@ with error and render the report
  - threshold: default report threshold (default: 0.02)
  - period: default search period (default: 1 day)
  - on: report bucket (default: :default)
+ - base_scope: scope to be universal sample
+ - uniq: when the output ids should not be repeated
+ - limit: limit of ids to be outputed
 
 4. Run the server and hit the health-check routes
 
