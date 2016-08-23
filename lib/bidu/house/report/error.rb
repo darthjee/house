@@ -1,27 +1,24 @@
 module Bidu
   module House
-    module Report
-      class Error
+    class Report
+      class Error < Report
         include JsonParser
 
         ALLOWED_PARAMETERS=[:period, :threshold]
+        DEFAULT_OPTION = {
+          external_key: :id,
+          threshold: 0.02,
+          period: 1.day,
+          scope: :with_error,
+          base_scope: :all,
+          uniq: false
+        }
 
         attr_reader :json
 
         json_parse :threshold, type: :float
         json_parse :period, type: :period
         json_parse :scope, :id, :clazz, :base_scope, :external_key, :uniq, :limit, case: :snake
-
-        def initialize(options)
-          @json = {
-            external_key: :id,
-            threshold: 0.02,
-            period: 1.day,
-            scope: :with_error,
-            base_scope: :all,
-            uniq: false
-          }.merge(options)
-        end
 
         def status
           @status ||= error? ? :error : :ok

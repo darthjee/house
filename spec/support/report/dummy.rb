@@ -1,7 +1,7 @@
 module Bidu
   module House
-    module Report
-      class Dummy
+    class Report
+      class Dummy < Report
         ALLOWED_PARAMETERS=[:period, :threshold]
         def initialize(options)
         end
