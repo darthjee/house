@@ -1,8 +1,8 @@
 module Bidu
   module House
     class Report
+      include JsonParser
       require 'bidu/house/report/error'
-
       ALLOWED_PARAMETERS = []
       DEFAULT_OPTION = {}
 
