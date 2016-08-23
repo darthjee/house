@@ -10,7 +10,7 @@ module Bidu
 
         json_parse :threshold, type: :float
         json_parse :period, type: :period
-        json_parse :scope, :id, :clazz, :base_scope, :external_key, :uniq, case: :snake
+        json_parse :scope, :id, :clazz, :base_scope, :external_key, :uniq, :limit, case: :snake
 
         def initialize(options)
           @json = {
@@ -56,6 +56,8 @@ module Bidu
         def ids
           relation = scoped
           relation = relation.uniq if uniq
+          relation = relation.limit(limit) if limit
+
           relation.pluck(external_key)
         end
 
