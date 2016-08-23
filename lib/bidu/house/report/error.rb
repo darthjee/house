@@ -18,10 +18,6 @@ module Bidu
         json_parse :period, type: :period
         json_parse :scope, :id, :clazz, :base_scope, :external_key, :uniq, :limit, case: :snake
 
-        def status
-          @status ||= error? ? :error : :ok
-        end
-
         def percentage
           @percentage ||= fetch_percentage
         end
@@ -32,10 +28,6 @@ module Bidu
 
         def error?
           @error ||= percentage > threshold
-        end
-
-        def status
-          error? ? :error : :ok
         end
 
         def as_json

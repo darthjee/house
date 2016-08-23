@@ -12,6 +12,18 @@ module Bidu
         @json = self.class::DEFAULT_OPTION.merge(options)
       end
 
+      def status
+        @status ||= error? ? :error : :ok
+      end
+
+      def error?
+        raise 'Not implemented yet'
+      end
+
+      def as_json
+        { status: status }
+      end
+
       private
 
       def fetch_scoped(base, scope)
