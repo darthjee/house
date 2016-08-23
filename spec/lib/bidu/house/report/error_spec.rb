@@ -343,6 +343,27 @@ describe Bidu::House::Report::Error do
         end
       end
 
+      context 'when some external ids are the same' do
+        let(:external_key) { :outter_external_id }
+        let(:ids_expected) { [10, 10, 10] }
+        before do
+          Document.update_all(outter_external_id: 10) 
+        end
+
+        it 'returns the correct external keys' do
+          expect(subject.as_json).to eq(expected)
+        end
+
+        context 'and passing uniq option' do
+          before { options[:uniq] = true }
+          let(:ids_expected) { [10] }
+
+          it 'returns the correct external keys only once' do
+            expect(subject.as_json).to eq(expected)
+          end
+        end
+      end
+
       context 'when configurated without external key' do
         before { options.delete(:external_key) }
         let(:ids_expected) { Document.with_error.where('created_at > ?', 30.hours.ago).map(&:id) }
