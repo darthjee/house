@@ -14,8 +14,6 @@ module Bidu
           uniq: false
         }
 
-        attr_reader :json
-
         json_parse :threshold, type: :float
         json_parse :period, type: :period
         json_parse :scope, :id, :clazz, :base_scope, :external_key, :uniq, :limit, case: :snake
@@ -64,24 +62,6 @@ module Bidu
           else
             last_entries.percentage(scope)
           end
-        end
-
-        def fetch_scoped(base, scope)
-          if (scope.is_a?(Symbol))
-            scope.to_s.split('.').inject(base) do |entries, method|
-              entries.public_send(method)
-            end
-          else
-            base.where(scope)
-          end
-        end
-
-        def last_entries
-          @last_entries ||= base.where('updated_at >= ?', period.seconds.ago)
-        end
-
-        def base
-          fetch_scoped(clazz, base_scope)
         end
       end
     end
