@@ -341,6 +341,35 @@ describe Bidu::House::Report::Error do
         it 'returns the correct external keys' do
           expect(subject.as_json).to eq(expected)
         end
+
+        context 'when some external ids are the same' do
+          let(:ids_expected) { [10, 10, 10] }
+          before do
+            Document.update_all(outter_external_id: 10)
+          end
+
+          it 'returns the correct external keys' do
+            expect(subject.as_json).to eq(expected)
+          end
+
+          context 'and passing uniq option' do
+            before { options[:uniq] = true }
+            let(:ids_expected) { [10] }
+
+            it 'returns the correct external keys only once' do
+              expect(subject.as_json).to eq(expected)
+            end
+          end
+        end
+
+        context 'with a limit' do
+          before { options[:limit] = 2 }
+          let(:ids_expected) { [0, 1] }
+
+          it 'returns only the limited ids' do
+            expect(subject.as_json).to eq(expected)
+          end
+        end
       end
 
       context 'when configurated without external key' do

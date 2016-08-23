@@ -10,7 +10,7 @@ module Bidu
 
         json_parse :threshold, type: :float
         json_parse :period, type: :period
-        json_parse :scope, :id, :clazz, :base_scope, :external_key, case: :snake
+        json_parse :scope, :id, :clazz, :base_scope, :external_key, :uniq, :limit, case: :snake
 
         def initialize(options)
           @json = {
@@ -18,7 +18,8 @@ module Bidu
             threshold: 0.02,
             period: 1.day,
             scope: :with_error,
-            base_scope: :all
+            base_scope: :all,
+            uniq: false
           }.merge(options)
         end
 
@@ -44,13 +45,21 @@ module Bidu
 
         def as_json
           {
-            ids: scoped.pluck(external_key),
+            ids: ids,
             percentage: percentage,
             status: status
           }
         end
 
         private
+
+        def ids
+          relation = scoped
+          relation = relation.uniq if uniq
+          relation = relation.limit(limit) if limit
+
+          relation.pluck(external_key)
+        end
 
         def fetch_percentage
           if (scope.is_a?(Symbol))
