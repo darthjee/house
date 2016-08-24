@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bidu-house (0.2.1)
+    bidu-house (1.0.0)
       activesupport
       bidu-active_ext
       concern_builder
@@ -27,7 +27,7 @@ GEM
     bidu-active_ext (1.0.0)
       activesupport
       bidu-core_ext
-    bidu-core_ext (1.2.1)
+    bidu-core_ext (1.2.2)
       activesupport
     builder (3.2.2)
     coderay (1.1.0)
@@ -82,4 +82,4 @@ DEPENDENCIES
   sqlite3
 
 BUNDLED WITH
-   1.10.6
+   1.12.5
