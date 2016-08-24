@@ -13,8 +13,7 @@ module Bidu
         }
 
         json_parse :threshold, type: :float
-        json_parse :period, type: :period
-        json_parse :scope, :id, :clazz, :base_scope, :external_key, :uniq, :limit, case: :snake
+        json_parse :scope, :id, :external_key, :uniq, :limit, case: :snake
 
         def initialize(options)
           super(DEFAULT_OPTION.merge(options))
