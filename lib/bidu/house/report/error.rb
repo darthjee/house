@@ -1,30 +1,22 @@
 module Bidu
   module House
-    module Report
-      class Error
-        include JsonParser
-
+    class Report
+      class Error < Report
         ALLOWED_PARAMETERS=[:period, :threshold]
-
-        attr_reader :json
+        DEFAULT_OPTION = {
+          external_key: :id,
+          threshold: 0.02,
+          period: 1.day,
+          scope: :with_error,
+          base_scope: :all,
+          uniq: false
+        }
 
         json_parse :threshold, type: :float
-        json_parse :period, type: :period
-        json_parse :scope, :id, :clazz, :base_scope, :external_key, :uniq, :limit, case: :snake
+        json_parse :scope, :id, :external_key, :uniq, :limit, case: :snake
 
         def initialize(options)
-          @json = {
-            external_key: :id,
-            threshold: 0.02,
-            period: 1.day,
-            scope: :with_error,
-            base_scope: :all,
-            uniq: false
-          }.merge(options)
-        end
-
-        def status
-          @status ||= error? ? :error : :ok
+          super(DEFAULT_OPTION.merge(options))
         end
 
         def percentage
@@ -37,10 +29,6 @@ module Bidu
 
         def error?
           @error ||= percentage > threshold
-        end
-
-        def status
-          error? ? :error : :ok
         end
 
         def as_json
@@ -67,24 +55,6 @@ module Bidu
           else
             last_entries.percentage(scope)
           end
-        end
-
-        def fetch_scoped(base, scope)
-          if (scope.is_a?(Symbol))
-            scope.to_s.split('.').inject(base) do |entries, method|
-              entries.public_send(method)
-            end
-          else
-            base.where(scope)
-          end
-        end
-
-        def last_entries
-          @last_entries ||= base.where('updated_at >= ?', period.seconds.ago)
-        end
-
-        def base
-          fetch_scoped(clazz, base_scope)
         end
       end
     end
