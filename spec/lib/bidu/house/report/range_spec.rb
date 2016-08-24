@@ -272,17 +272,6 @@ describe Bidu::House::Report::Range do
     end
   end
 
-  describe '#status' do
-    context 'when errors percentage overcames threshold' do
-      it { expect(subject.status).to eq(:error) }
-    end
-
-    context 'when errors percentage does not overcames threshold' do
-      let(:errors) { 0 }
-      it { expect(subject.status).to eq(:ok) }
-    end
-  end
-
   describe '#as_json' do
     let(:expected) do
       { ids: ids_expected, percentage: percentage_expected, status: status_expected }
