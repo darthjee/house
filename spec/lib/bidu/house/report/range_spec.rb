@@ -62,6 +62,12 @@ describe Bidu::House::Report::Range do
         it { expect(subject.status).to eq(:ok) }
       end
 
+      context 'when the count is less than the maximum' do
+        let(:errors) { 1 }
+        let(:maximum) { 2 }
+        it { expect(subject.status).to eq(:ok) }
+      end
+
       context 'when there are older errors out of the period' do
         let(:maximum) { 1 }
 
@@ -100,6 +106,12 @@ describe Bidu::House::Report::Range do
 
       context 'when the count is the same as the maximum' do
         let(:successes) { 1 }
+        let(:minimum) { 1 }
+        it { expect(subject.status).to eq(:ok) }
+      end
+
+      context 'when the count is greater than the maximum' do
+        let(:successes) { 2 }
         let(:minimum) { 1 }
         it { expect(subject.status).to eq(:ok) }
       end
