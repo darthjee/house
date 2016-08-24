@@ -9,7 +9,7 @@ module Bidu
       attr_reader :json
 
       json_parse :period, type: :period
-      json_parse :clazz, :base_scope, case: :snake
+      json_parse :clazz, :base_scope, :id, case: :snake
 
       def initialize(options)
         @json = DEFAULT_OPTION.merge(options)
