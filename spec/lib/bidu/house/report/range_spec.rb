@@ -259,11 +259,14 @@ describe Bidu::House::Report::Range do
   end
 
   describe '#error?' do
-    context 'when errors percentage overcames threshold' do
+    let(:errors) { 2 }
+    let(:maximum) { 1 }
+
+    context 'when errors count overcome maximum' do
       it { expect(subject.error?).to be_truthy }
     end
 
-    context 'when errors percentage does not overcames threshold' do
+    context 'when errors count do not overcome maximum' do
       let(:errors) { 0 }
       it { expect(subject.error?).to be_falsey }
     end
