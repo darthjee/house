@@ -2,7 +2,7 @@ module Bidu
   module House
     class Report
       class Range < Report
-        ALLOWED_PARAMETERS=[:period, :threshold]
+        ALLOWED_PARAMETERS=[:period, :maximum, :minimum]
         DEFAULT_OPTION = {
           period: 1.day,
           scope: :all,
