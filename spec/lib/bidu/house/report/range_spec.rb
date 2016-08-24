@@ -84,6 +84,7 @@ describe Bidu::House::Report::Range do
         end
       end
     end
+
     context 'when looking for minimum' do
       let(:scope) { :with_success }
       context 'when there are less successes than the allowed by the minimum' do
@@ -104,13 +105,13 @@ describe Bidu::House::Report::Range do
         it { expect(subject.status).to eq(:ok) }
       end
 
-      context 'when the count is the same as the maximum' do
+      context 'when the count is the same as the minimum' do
         let(:successes) { 1 }
         let(:minimum) { 1 }
         it { expect(subject.status).to eq(:ok) }
       end
 
-      context 'when the count is greater than the maximum' do
+      context 'when the count is greater than the minimum' do
         let(:successes) { 2 }
         let(:minimum) { 1 }
         it { expect(subject.status).to eq(:ok) }
@@ -129,6 +130,88 @@ describe Bidu::House::Report::Range do
   
           it 'consider the older sucesses' do
             expect(subject.status).to eq(:ok)
+          end
+        end
+      end
+    end
+
+    context 'when looking for a range' do
+      let(:scope) { :all }
+      let(:minimum) { 2 }
+      let(:maximum) { 4 }
+
+      context 'when there are less documents than the allowed by the minimum' do
+        let(:successes) { 1 }
+        let(:errors) { 0 }
+        it { expect(subject.status).to eq(:error) }
+      end
+
+      context 'when the count is the same as the minimum' do
+        let(:successes) { 1 }
+        let(:errors) { 2 }
+        it { expect(subject.status).to eq(:ok) }
+      end
+
+      context 'when the count is inside the range' do
+        let(:successes) { 1 }
+        let(:errors) { 2 }
+        it { expect(subject.status).to eq(:ok) }
+      end
+
+      context 'when the count is the same as the maximum' do
+        let(:successes) { 2 }
+        let(:errors) { 2 }
+        it { expect(subject.status).to eq(:ok) }
+      end
+
+      context 'when the count is greater than the maximum' do
+        let(:successes) { 3 }
+        let(:errors) { 2 }
+        it { expect(subject.status).to eq(:error) }
+      end
+
+      context 'when the minimum is 0 and the count is 0' do
+        let(:successes) { 0 }
+        let(:errors) { 0 }
+        let(:minimum) { 0 }
+        it { expect(subject.status).to eq(:ok) }
+      end
+
+      context 'when there are older sucesses out of the period' do
+        let(:old_errors) { 1 }
+        let(:old_sucesses) { 2 }
+
+        context 'and the regular documents are not enough' do
+          let(:successes) { 1 }
+          let(:errors) { 0 }
+ 
+          it 'ignores the older sucesses' do
+            expect(subject.status).to eq(:error)
+          end
+
+          context 'when passing a bigger period' do
+            let(:period) { 3.days }
+  
+            it 'consider the older sucesses' do
+              expect(subject.status).to eq(:ok)
+            end
+          end
+        end
+
+        context 'and the regular documents are almost in the limit' do
+          let(:successes) { 2 }
+          let(:errors) { 1 }
+ 
+          it 'ignores the older sucesses' do
+            expect(subject.status).to eq(:ok)
+          end
+
+          context 'when passing a bigger period' do
+            let(:period) { 3.days }
+  
+            it 'consider the older documents' do
+              expect(subject.status).to eq(:error)
+            end
           end
         end
       end
