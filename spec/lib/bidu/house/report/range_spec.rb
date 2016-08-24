@@ -216,18 +216,27 @@ describe Bidu::House::Report::Range do
         end
       end
     end
+  end
 
+  describe '#count' do 
+    let(:types) { [:a, :b] }
+    let(:errors) { 1 }
+    let(:scope) { :with_error }
+
+    it 'returns all the documents found' do
+      expect(subject.count).to eq(2)
+    end
+    
     context 'when configuring with a complex scope' do
-      let(:types) { [:a, :b] }
       let(:old_errors) { 0 }
       let(:scope) { :'with_error.type_b' }
       let(:errors) { 1 }
-      let(:successes) { 3 }
+
       context 'as symbol' do
         let(:scope) { :'with_error.type_b' }
 
         it 'fetches from each scope in order' do
-          expect(subject.percentage).to eq(0.125)
+          expect(subject.count).to eq(1)
         end
       end
 
@@ -235,7 +244,7 @@ describe Bidu::House::Report::Range do
         let(:scope) { "status = 'error' and doc_type = 'b'" }
 
         it 'fetches from each scope in order' do
-          expect(subject.percentage).to eq(0.125)
+          expect(subject.count).to eq(1)
         end
       end
 
@@ -243,7 +252,7 @@ describe Bidu::House::Report::Range do
         let(:scope) { { status: :error, doc_type: :b } }
 
         it 'fetches from each scope in order' do
-          expect(subject.percentage).to eq(0.125)
+          expect(subject.count).to eq(1)
         end
       end
     end
