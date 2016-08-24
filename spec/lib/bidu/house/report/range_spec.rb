@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe Bidu::House::Report::Range do
   let(:errors) { 1 }
-  let(:successes) { 10 }
+  let(:successes) { 1 }
   let(:old_errors) { 2 }
+  let(:old_sucesses) { 2 }
   let(:period) { 1.day }
   let(:scope) { :with_error }
   let(:maximum) { nil }
@@ -29,6 +30,9 @@ describe Bidu::House::Report::Range do
       old_errors.times do
         Document.create status: :error, created_at: 2.days.ago, updated_at: 2.days.ago, doc_type: type
       end
+      old_sucesses.times do
+        Document.create status: :success, created_at: 2.days.ago, updated_at: 2.days.ago, doc_type: type
+      end
     end
   end
 
@@ -42,13 +46,13 @@ describe Bidu::House::Report::Range do
 
       context 'when the maximum is 0 and there are no errors' do
         let(:errors) { 0 }
-        let(:maximum) { nil }
+        let(:maximum) { 0 }
         it { expect(subject.status).to eq(:ok) }
       end
 
       context 'when the maximum is nil and there are no errors' do
         let(:errors) { 0 }
-        let(:maximum) { 0 }
+        let(:maximum) { nil }
         it { expect(subject.status).to eq(:ok) }
       end
 
@@ -70,6 +74,49 @@ describe Bidu::House::Report::Range do
   
           it 'consider the older errros' do
             expect(subject.status).to eq(:error)
+          end
+        end
+      end
+    end
+    context 'when looking for minimum' do
+      let(:scope) { :with_success }
+      context 'when there are less successes than the allowed by the minimum' do
+        let(:successes) { 1 }
+        let(:minimum) { 2 }
+        it { expect(subject.status).to eq(:error) }
+      end
+
+      context 'when the minimum is 0 and there are no sucesses' do
+        let(:successes) { 0 }
+        let(:minimum) { 0 }
+        it { expect(subject.status).to eq(:ok) }
+      end
+
+      context 'when the minimum is nil and there are no sucesses' do
+        let(:successes) { 0 }
+        let(:minimum) { nil }
+        it { expect(subject.status).to eq(:ok) }
+      end
+
+      context 'when the count is the same as the maximum' do
+        let(:successes) { 1 }
+        let(:minimum) { 1 }
+        it { expect(subject.status).to eq(:ok) }
+      end
+
+      context 'when there are older sucesses out of the period' do
+        let(:successes) { 0 }
+        let(:minimum) { 1 }
+
+        it 'ignores the older sucesses' do
+          expect(subject.status).to eq(:error)
+        end
+
+        context 'when passing a bigger period' do
+          let(:period) { 3.days }
+  
+          it 'consider the older sucesses' do
+            expect(subject.status).to eq(:ok)
           end
         end
       end
