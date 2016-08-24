@@ -274,79 +274,28 @@ describe Bidu::House::Report::Range do
 
   describe '#as_json' do
     let(:expected) do
-      { ids: ids_expected, percentage: percentage_expected, status: status_expected }
+      { count: count_expected, status: status_expected }
     end
 
     context 'when everything is ok' do
       let(:errors) { 1 }
-      let(:successes) { 9 }
-      let(:ids_expected) { [90] }
       let(:status_expected) { :ok }
-      let(:percentage_expected) { 0.1 }
-      let(:threshold) { 0.5 }
+      let(:count_expected) { errors }
+      let(:maximum) { 2 }
 
-      it 'returns the external keys, status and error percentage' do
+      it 'returns the count and status' do
         expect(subject.as_json).to eq(expected)
       end
-
     end
 
-    context 'when there are 75% erros' do
+    context 'when there is an error' do
+      let(:errors) { 2 }
       let(:status_expected) { :error }
-      let(:percentage_expected) { 0.75 }
-      let(:errors) { 3 }
-      let(:successes) { 1 }
-      let(:ids_expected) { [10, 11, 12] }
+      let(:count_expected) { errors }
+      let(:maximum) { 1 }
 
-      it 'returns the external keys, status and error percentage' do
+      it 'returns the count and status' do
         expect(subject.as_json).to eq(expected)
-      end
-
-      context 'when configurated with different external key' do
-        let(:external_key) { :outter_external_id }
-        let(:ids_expected) { [0, 1, 2] }
-
-        it 'returns the correct external keys' do
-          expect(subject.as_json).to eq(expected)
-        end
-
-        context 'when some external ids are the same' do
-          let(:ids_expected) { [10, 10, 10] }
-          before do
-            Document.update_all(outter_external_id: 10)
-          end
-
-          it 'returns the correct external keys' do
-            expect(subject.as_json).to eq(expected)
-          end
-
-          context 'and passing uniq option' do
-            before { options[:uniq] = true }
-            let(:ids_expected) { [10] }
-
-            it 'returns the correct external keys only once' do
-              expect(subject.as_json).to eq(expected)
-            end
-          end
-        end
-
-        context 'with a limit' do
-          before { options[:limit] = 2 }
-          let(:ids_expected) { [0, 1] }
-
-          it 'returns only the limited ids' do
-            expect(subject.as_json).to eq(expected)
-          end
-        end
-      end
-
-      context 'when configurated without external key' do
-        before { options.delete(:external_key) }
-        let(:ids_expected) { Document.with_error.where('created_at > ?', 30.hours.ago).map(&:id) }
-
-        it 'returns the ids as default id' do
-          expect(subject.as_json).to eq(expected)
-        end
       end
     end
   end
