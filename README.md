@@ -21,8 +21,10 @@ with error and render the report
     include Bidu::House
 
     status_report :failures, clazz: Document
-    status_report :failures, clazz: Schedules, on: :schedules
+    status_report :'failures.schedules', clazz: Schedules, on: :schedules
     status_report :delays, clazz: Schedules, scope: :late, on: :schedules
+    status_report :'documents.count', clazz: Document, scope: :active, type: House::Range, minimum: 100
+    status_report :'documents.errors', clazz: Document, scope: :'active.with_error', type: :range, maximum: 1000
 
     def status
       render_status
@@ -45,14 +47,23 @@ with error and render the report
 
 3. Set the correct options on your status report to achieve a perfect report
  - clazz: Class of the object that might contain error
- - scope: scope to be fetched when trying to find objects with error (default: :with_error)
- - external_key: column to be exposed as id for the objects with error
- - threshold: default report threshold (default: 0.02)
  - period: default search period (default: 1 day)
  - on: report bucket (default: :default)
- - base_scope: scope to be universal sample
- - uniq: when the output ids should not be repeated
- - limit: limit of ids to be outputed
+ - type: report type (error, range or other custom report)
+ 
+  Remembering that each report may have its onw parameters
+
+ - ```House::Error```
+   - scope: scope to be fetched when trying to find objects with error (default: :with_error)
+   - external_key: column to be exposed as id for the objects with error
+   - threshold: default report threshold (default: 0.02)
+   - base_scope: scope to be universal sample
+   - uniq: when the output ids should not be repeated
+   - limit: limit of ids to be outputed
+ - ```House::Range```
+   - scope: scope of the query to be counted
+   - maximum: max value accepted in the range
+   - minimum: minimum value accepted in the range
 
 4. Run the server and hit the health-check routes
 
