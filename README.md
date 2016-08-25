@@ -23,7 +23,7 @@ with error and render the report
     include Bidu::House
 
     status_report :failures, clazz: Document
-    status_report :'failures.schedules', clazz: Schedules, on: :schedules
+    status_report :failures, clazz: Schedules, on: :schedules
     status_report :delays, clazz: Schedules, scope: :late, on: :schedules
     status_report :'documents.count', clazz: Document, scope: :active, type: House::Range, minimum: 100
     status_report :'documents.errors', clazz: Document, scope: :'active.with_error', type: :range, maximum: 1000
