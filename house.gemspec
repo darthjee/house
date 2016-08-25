@@ -30,4 +30,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "rspec", "~> 2.14"
   gem.add_development_dependency 'pry-nav'
   gem.add_development_dependency 'simplecov'
+  gem.add_development_dependency 'codeclimate-test-reporter'
 end
