@@ -10,7 +10,8 @@ module Bidu
           maximum: nil
         }
 
-        json_parse :scope, :minimum, :maximum, case: :snake
+        json_parse :scope
+        json_parse :minimum, :maximum, type: :integer
 
         def initialize(options)
           super(DEFAULT_OPTION.merge(options))
