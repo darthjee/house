@@ -1,7 +1,7 @@
 module Bidu
   module House
     class Report
-      class Error < Report
+      class Error < Report::ActiveRecord
         ALLOWED_PARAMETERS=[:period, :threshold]
         DEFAULT_OPTION = {
           external_key: :id,
