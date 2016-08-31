@@ -1,7 +1,7 @@
 module Bidu
   module House
     class Report
-      class Range < Report
+      class Range < Report::ActiveRecord
         ALLOWED_PARAMETERS=[:period, :maximum, :minimum]
         DEFAULT_OPTION = {
           period: 1.day,
