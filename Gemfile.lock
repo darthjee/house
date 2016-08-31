@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bidu-house (1.1.0)
+    bidu-house (1.2.0)
       activesupport
       bidu-active_ext
       concern_builder
