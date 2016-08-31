@@ -12,7 +12,7 @@ module Bidu
 
       json_parse :id, case: :snake
 
-      def initialize(options)
+      def initialize(options = {})
         @json = DEFAULT_OPTION.merge(options)
       end
 
