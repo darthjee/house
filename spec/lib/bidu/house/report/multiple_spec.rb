@@ -16,7 +16,8 @@ describe Bidu::House::Report::Multiple do
     end
   end
 
-  class Bidu::House::Report::Multiple::Dummy < Bidu::House::Report::Multiple
+  class Bidu::House::Report::Multiple::Dummy < Bidu::House::Report
+    include Bidu::House::Report::Multiple
     DEFAULT_OPTION = {
       doc_type: [:a, :b]
     }
