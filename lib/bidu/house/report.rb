@@ -14,7 +14,7 @@ module Bidu
       json_parse :id, case: :snake
 
       def initialize(options = {})
-        @json = self.class::DEFAULT_OPTION.merge(options)
+        @json = default_option.merge(options)
       end
 
       def status
@@ -27,6 +27,17 @@ module Bidu
 
       def as_json
         { status: status }
+      end
+
+      private
+
+      def default_option
+        self.class.default_options
+      end
+
+      def self.default_options
+        return {} if self == Report
+        self.superclass.default_options.merge(self::DEFAULT_OPTION)
       end
     end
   end
