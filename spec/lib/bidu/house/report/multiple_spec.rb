@@ -5,10 +5,6 @@ describe Bidu::House::Report::Multiple do
     ALLOWED_PARAMETERS=[:period, :threshold]
     DEFAULT_OPTION = {
       threshold: 0.25,
-      period: 1.day,
-      scope: :with_error,
-      base_scope: :all,
-      uniq: false,
       clazz: Document,
       external_key: :external_id
     }
