@@ -16,7 +16,7 @@ module Bidu
         json_parse :scope, :external_key, :uniq, :limit, case: :snake
 
         def initialize(options)
-          super(DEFAULT_OPTION.merge(options))
+          super(self.class::DEFAULT_OPTION.merge(options))
         end
 
         def percentage

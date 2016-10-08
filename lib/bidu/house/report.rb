@@ -5,6 +5,7 @@ module Bidu
       require 'bidu/house/report/active_record'
       require 'bidu/house/report/error'
       require 'bidu/house/report/range'
+      require 'bidu/house/report/multiple'
       ALLOWED_PARAMETERS = []
       DEFAULT_OPTION = {}
 
@@ -13,7 +14,7 @@ module Bidu
       json_parse :id, case: :snake
 
       def initialize(options = {})
-        @json = DEFAULT_OPTION.merge(options)
+        @json = default_option.merge(options)
       end
 
       def status
@@ -26,6 +27,17 @@ module Bidu
 
       def as_json
         { status: status }
+      end
+
+      private
+
+      def default_option
+        self.class.default_options
+      end
+
+      def self.default_options
+        return {} if self == Report
+        self.superclass.default_options.merge(self::DEFAULT_OPTION)
       end
     end
   end
