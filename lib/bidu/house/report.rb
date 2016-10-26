@@ -31,7 +31,7 @@ module Bidu
       end
 
       def enabled?
-        active.include?(Time.now)
+        active.nil? || active.include?(Time.now)
       end
 
       private

@@ -32,7 +32,15 @@ describe Bidu::House::Report do
   describe '#enabled?' do
     let(:subject) { described_class.new(options) }
 
-    context 'when setting an operation_time' do
+    context 'when not setting the active time' do
+      let(:options) { {} }
+
+      it do
+        expect(subject.enabled?).to be_truthy
+      end
+    end
+
+    context 'when setting active time' do
       let(:options) do
         { active: { from: '06:00', to: '20:00' } }
       end
