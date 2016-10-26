@@ -28,5 +28,31 @@ describe Bidu::House::Report do
       end
     end
   end
+
+  describe '#enabled?' do
+    let(:subject) { described_class.new(options) }
+
+    context 'when setting an operation_time' do
+      let(:options) do
+        { operate: { from: '06:00', to: '20:00' } }
+      end
+
+      context 'when operating withing the time limit' do
+        before { Timecop.freeze(Time.local(2016, 10, 10, 10, 0, 0)) }
+
+        it do
+          expect(subject.enabled?).to be_truthy
+        end
+      end
+
+      context 'when operating outside the time limit' do
+        before { Timecop.freeze(Time.local(2016, 10, 10, 23, 0, 0)) }
+
+        it do
+          expect(subject.enabled?).to be_falsey
+        end
+      end
+    end
+  end
 end
 

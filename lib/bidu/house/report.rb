@@ -12,6 +12,8 @@ module Bidu
       attr_reader :json
 
       json_parse :id, case: :snake
+      json_parse :operate_to, full_path: 'operate.to'
+      json_parse :operate_from, full_path: 'operate.from'
 
       def initialize(options = {})
         @json = default_option.merge(options)
@@ -27,6 +29,10 @@ module Bidu
 
       def as_json
         { status: status }
+      end
+
+      def enabled?
+        true
       end
 
       private
