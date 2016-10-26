@@ -12,8 +12,7 @@ module Bidu
       attr_reader :json
 
       json_parse :id, case: :snake
-      json_parse :operate_to, full_path: 'operate.to'
-      json_parse :operate_from, full_path: 'operate.from'
+      json_parse :active, class: TimeRange
 
       def initialize(options = {})
         @json = default_option.merge(options)
@@ -32,7 +31,7 @@ module Bidu
       end
 
       def enabled?
-        true
+        active.include?(Time.now)
       end
 
       private

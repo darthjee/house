@@ -34,7 +34,7 @@ describe Bidu::House::Report do
 
     context 'when setting an operation_time' do
       let(:options) do
-        { operate: { from: '06:00', to: '20:00' } }
+        { active: { from: '06:00', to: '20:00' } }
       end
 
       context 'when operating withing the time limit' do

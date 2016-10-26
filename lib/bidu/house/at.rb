@@ -1,5 +1,25 @@
 class Bidu::House::At
   include ActiveModel::Model
-  attr_reader :year, :month, :day, :week_day, :hour, :minute, :second
+  attr_accessor :year, :month, :day, :week_day, :hour, :minute, :second
+
+  def >(target)
+    true
+  end
+
+  def <(target)
+    true
+  end
+
+  def >=(target)
+    self == target || self > (target)
+  end
+
+  def <=(target)
+    self == target || self < (target)
+  end
+
+  def ==(target)
+    true
+  end
 end
 
