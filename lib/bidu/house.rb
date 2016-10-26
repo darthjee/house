@@ -7,6 +7,8 @@ require 'json_parser/type_cast_ext'
 
 module Bidu
   module House
+    require 'bidu/house/at'
+    require 'bidu/house/time_range'
     require 'bidu/house/concern'
     require 'bidu/house/report_config'
     require 'bidu/house/report'
