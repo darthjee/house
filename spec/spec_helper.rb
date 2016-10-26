@@ -12,6 +12,7 @@ SimpleCov.start 'gem'
 
 require 'pry-nav'
 require 'bidu/house'
+require 'timecop'
 
 require 'active_record'
 ActiveRecord::Base.establish_connection(adapter: "sqlite3", database: ":memory:")
