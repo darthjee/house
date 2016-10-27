@@ -7,7 +7,7 @@ class Bidu::House::At
   end
 
   def <(target)
-    true
+    time(target) < target
   end
 
   def >=(target)
@@ -20,6 +20,19 @@ class Bidu::House::At
 
   def ==(target)
     true
+  end
+
+  private
+
+  def time(target)
+    Time.new(
+      year || target.year,
+      month || target.month,
+      day || target.day,
+      hour || target.hour,
+      minute || target.min,
+      second || target.sec
+    )
   end
 end
 
