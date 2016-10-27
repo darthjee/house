@@ -10,7 +10,7 @@ module Bidu::House
     end
 
     def include?(time)
-      from <= time && to >= from
+      from <= time && to >= time
     end
 
     private

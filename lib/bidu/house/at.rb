@@ -3,7 +3,7 @@ class Bidu::House::At
   attr_accessor :year, :month, :day, :week_day, :hour, :minute, :second
 
   def >(target)
-    true
+    time(target) > target
   end
 
   def <(target)
@@ -11,15 +11,11 @@ class Bidu::House::At
   end
 
   def >=(target)
-    self == target || self > (target)
+    !(self < target)
   end
 
   def <=(target)
-    self == target || self < (target)
-  end
-
-  def ==(target)
-    true
+    !(self > target)
   end
 
   private
