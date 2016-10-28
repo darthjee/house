@@ -11,24 +11,6 @@ class Bidu::House::At
     @second = 0 if minute && !second
   end
 
-  def >(target)
-    time(target) > target
-  end
-
-  def <(target)
-    time(target) < target
-  end
-
-  def >=(target)
-    !(self < target)
-  end
-
-  def <=(target)
-    !(self > target)
-  end
-
-  private
-
   def time(target)
     Time.new(
       year || target.year,
