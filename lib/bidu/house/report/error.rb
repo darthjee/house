@@ -43,7 +43,7 @@ module Bidu
 
         def ids
           relation = scoped
-          relation = relation.uniq if uniq
+          relation = relation.distinct if uniq
           relation = relation.limit(limit) if limit
 
           relation.pluck(external_key)
