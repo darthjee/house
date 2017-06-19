@@ -38,7 +38,7 @@ GEM
     diff-lcs (1.2.5)
     docile (1.1.5)
     i18n (0.7.0)
-    json (1.8.3)
+    json (1.8.6)
     json_parser (1.1.0)
       activesupport
       concern_builder
@@ -85,4 +85,4 @@ DEPENDENCIES
   sqlite3
 
 BUNDLED WITH
-   1.12.5
+   1.15.1
