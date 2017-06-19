@@ -25,10 +25,9 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "activerecord"
   gem.add_development_dependency "sqlite3"
 
-  gem.add_development_dependency "bundler", "~> 1.6"
+  gem.add_development_dependency "bundler"
   gem.add_development_dependency "rake"
-  gem.add_development_dependency "rspec", "~> 2.14"
+  gem.add_development_dependency "rspec"
   gem.add_development_dependency 'pry-nav'
   gem.add_development_dependency 'simplecov'
-  gem.add_development_dependency 'codeclimate-test-reporter'
 end
