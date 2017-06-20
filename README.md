@@ -1,8 +1,9 @@
 Bidu House
 ==========
 
-[![Code Climate](https://codeclimate.com/github/Bidu/house/badges/gpa.svg)](https://codeclimate.com/github/Bidu/house)
-[![Test Coverage](https://codeclimate.com/github/Bidu/house/badges/coverage.svg)](https://codeclimate.com/github/Bidu/house/coverage)
+[![Code Climate](https://codeclimate.com/github/darthjee/house/badges/gpa.svg)](https://codeclimate.com/github/darthjee/house)
+[![Test Coverage](https://codeclimate.com/github/darthjee/house/badges/coverage.svg)](https://codeclimate.com/github/darthjee/house/coverage)
+[![Issue Count](https://codeclimate.com/github/darthjee/house/badges/issue_count.svg)](https://codeclimate.com/github/darthjee/house)
 
 This gem tries to make server monitoring easier and more reliable by adding an easly configurable
 report and making it avaliable in a controller
