@@ -1,6 +1,6 @@
-require 'bidu/active_ext'
+require 'darthjee/active_ext'
 require 'concern_builder'
-require 'bidu/core_ext'
+require 'darthjee/core_ext'
 require 'bidu/period_parser'
 require 'json_parser'
 require 'json_parser/type_cast_ext'
