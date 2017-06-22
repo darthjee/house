@@ -7,12 +7,12 @@ require 'json_parser/type_cast_ext'
 
 module Bidu
   module Mercy
-    require 'bidu/mercy/concern'
-    require 'bidu/mercy/report_config'
-    require 'bidu/mercy/report'
-    require 'bidu/mercy/status'
-    require 'bidu/mercy/report_builder'
-    require 'bidu/mercy/status_builder'
-    require 'bidu/mercy/class_methods'
+    require 'mercy/concern'
+    require 'mercy/report_config'
+    require 'mercy/report'
+    require 'mercy/status'
+    require 'mercy/report_builder'
+    require 'mercy/status_builder'
+    require 'mercy/class_methods'
   end
 end

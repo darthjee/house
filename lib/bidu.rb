@@ -1,3 +1,3 @@
 module Bidu
-  require 'bidu/mercy'
+  require 'mercy'
 end

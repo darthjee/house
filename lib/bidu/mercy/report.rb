@@ -2,10 +2,10 @@ module Bidu
   module Mercy
     class Report
       include JsonParser
-      require 'bidu/mercy/report/active_record'
-      require 'bidu/mercy/report/error'
-      require 'bidu/mercy/report/range'
-      require 'bidu/mercy/report/multiple'
+      require 'mercy/report/active_record'
+      require 'mercy/report/error'
+      require 'mercy/report/range'
+      require 'mercy/report/multiple'
       ALLOWED_PARAMETERS = []
       DEFAULT_OPTION = {}
 
