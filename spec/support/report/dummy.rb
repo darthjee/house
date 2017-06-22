@@ -1,10 +1,8 @@
-module Bidu
-  module Mercy
-    class Report
-      class Dummy < Report
-        ALLOWED_PARAMETERS=[:period, :threshold]
-        def initialize(options)
-        end
+module Mercy
+  class Report
+    class Dummy < Report
+      ALLOWED_PARAMETERS=[:period, :threshold]
+      def initialize(options)
       end
     end
   end
