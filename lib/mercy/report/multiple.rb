@@ -1,4 +1,4 @@
-module Bidu::Mercy::Report::Multiple
+module Mercy::Report::Multiple
   def as_json
     {
       status: status

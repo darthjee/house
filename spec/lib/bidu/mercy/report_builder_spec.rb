@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Bidu::Mercy::ReportBuilder do
+describe Mercy::ReportBuilder do
   let(:errors) { 1 }
   let(:successes) { 3 }
   let(:old_errors) { 2 }
@@ -33,7 +33,7 @@ describe Bidu::Mercy::ReportBuilder do
   describe '#build' do
     let(:ids) { [ 10 ] }
     it do
-      expect(report).to be_a(Bidu::Mercy::Report::Error)
+      expect(report).to be_a(Mercy::Report::Error)
     end
 
     it 'builds the report using the given configuration' do
@@ -59,7 +59,7 @@ describe Bidu::Mercy::ReportBuilder do
 
     context 'when passing a custom other parameters' do
       let(:parameters) do
-        { scope: :with_success, clazz: Bidu::Mercy::Report::Error, external_key: :id, id: :failures }
+        { scope: :with_success, clazz: Mercy::Report::Error, external_key: :id, id: :failures }
       end
 
       it 'ignores the non customizable parameters' do

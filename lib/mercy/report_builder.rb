@@ -7,7 +7,7 @@ module Bidu
       end
 
       def add_config(key, config)
-        configs[key] = Bidu::Mercy::ReportConfig.new(config)
+        configs[key] = Mercy::ReportConfig.new(config)
       end
 
       private

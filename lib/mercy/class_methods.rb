@@ -12,7 +12,7 @@ module Bidu
       end
 
       def status_builder
-        @status_builder ||= Bidu::Mercy::StatusBuilder.new
+        @status_builder ||= Mercy::StatusBuilder.new
       end
     end
   end

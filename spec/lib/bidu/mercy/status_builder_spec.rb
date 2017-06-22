@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Bidu::Mercy::StatusBuilder do
+describe Mercy::StatusBuilder do
   let(:errors) { 1 }
   let(:successes) { 3 }
   let(:old_errors) { 2 }
@@ -47,7 +47,7 @@ describe Bidu::Mercy::StatusBuilder do
     end
 
     it do
-      expect(status).to be_a(Bidu::Mercy::Status)
+      expect(status).to be_a(Mercy::Status)
     end
 
     context 'when not specifying where to report' do

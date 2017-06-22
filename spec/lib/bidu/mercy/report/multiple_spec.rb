@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Bidu::Mercy::Report::Multiple do
-  class Bidu::Mercy::Report::DocTypeError < Bidu::Mercy::Report::Error
+describe Mercy::Report::Multiple do
+  class Mercy::Report::DocTypeError < Mercy::Report::Error
     ALLOWED_PARAMETERS=[:period, :threshold]
     DEFAULT_OPTION = {
       threshold: 0.25,
@@ -16,8 +16,8 @@ describe Bidu::Mercy::Report::Multiple do
     end
   end
 
-  class Bidu::Mercy::Report::Multiple::Dummy < Bidu::Mercy::Report
-    include Bidu::Mercy::Report::Multiple
+  class Mercy::Report::Multiple::Dummy < Mercy::Report
+    include Mercy::Report::Multiple
     DEFAULT_OPTION = {
       doc_type: [:a, :b]
     }
@@ -28,7 +28,7 @@ describe Bidu::Mercy::Report::Multiple do
     end
 
     def sub_report_class
-      Bidu::Mercy::Report::DocTypeError
+      Mercy::Report::DocTypeError
     end
 
     def key

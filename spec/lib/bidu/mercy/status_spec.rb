@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Bidu::Mercy::Status do
+describe Mercy::Status do
   let(:threshold) { 0.02 }
   let(:period) { 1.day }
   let(:report_options) do
@@ -20,9 +20,9 @@ describe Bidu::Mercy::Status do
   end
   let(:errors) { 0 }
   let(:successes) { 1 }
-  let(:error_report) { Bidu::Mercy::Report::Error.new(report_options) }
+  let(:error_report) { Mercy::Report::Error.new(report_options) }
   let(:success_report) do
-    Bidu::Mercy::Report::Error.new(success_options)
+    Mercy::Report::Error.new(success_options)
   end
   let(:reports) { [ error_report ] }
   let(:subject) { described_class.new(reports) }
@@ -56,7 +56,7 @@ describe Bidu::Mercy::Status do
 
     context 'when there are both success and error reports' do
       let(:success_report) do
-        Bidu::Mercy::Report::Error.new(report_options.merge(scope: :with_success))
+        Mercy::Report::Error.new(report_options.merge(scope: :with_success))
       end
       let(:reports) { [ success_report, error_report ] }
 

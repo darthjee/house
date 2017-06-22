@@ -1,7 +1,7 @@
 module JsonParser
   module TypeCast
     def to_period(value)
-      Bidu::PeriodParser.parse(value)
+      Mercy::PeriodParser.parse(value)
     end
   end
 end

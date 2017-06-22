@@ -22,7 +22,7 @@ module Bidu
 
       def report_class
         return type if type.is_a?(Class)
-        @report_class ||= Bidu::Mercy::Report.const_get(type.to_s.camelize)
+        @report_class ||= Mercy::Report.const_get(type.to_s.camelize)
       end
 
       def slice_parameters(parameters)
