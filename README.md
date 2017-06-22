@@ -1,19 +1,19 @@
-Bidu House
+Mercy
 ==========
 
-[![Code Climate](https://codeclimate.com/github/darthjee/house/badges/gpa.svg)](https://codeclimate.com/github/darthjee/house)
-[![Test Coverage](https://codeclimate.com/github/darthjee/house/badges/coverage.svg)](https://codeclimate.com/github/darthjee/house/coverage)
-[![Issue Count](https://codeclimate.com/github/darthjee/house/badges/issue_count.svg)](https://codeclimate.com/github/darthjee/house)
+[![Code Climate](https://codeclimate.com/github/darthjee/mercy/badges/gpa.svg)](https://codeclimate.com/github/darthjee/mercy)
+[![Test Coverage](https://codeclimate.com/github/darthjee/mercy/badges/coverage.svg)](https://codeclimate.com/github/darthjee/mercy/coverage)
+[![Issue Count](https://codeclimate.com/github/darthjee/mercy/badges/issue_count.svg)](https://codeclimate.com/github/darthjee/mercy)
 
 This gem tries to make server monitoring easier and more reliable by adding an easly configurable
 report and making it avaliable in a controller
 
 Getting started
 ---------------
-1. Add House to your `Gemfile` and `bundle install`:
+1. Add Mercy to your `Gemfile` and `bundle install`:
 
     ```ruby
-    gem 'bidu-house'
+    gem 'mercy'
     ```
 
 
@@ -22,12 +22,12 @@ with error and render the report
 
   ```ruby
   class HealthCheckController < ApplicationController
-    include Bidu::House
+    include Mercy
 
     status_report :failures, clazz: Document
     status_report :failures, clazz: Schedules, on: :schedules
     status_report :delays, clazz: Schedules, scope: :late, on: :schedules
-    status_report :'documents.count', clazz: Document, scope: :active, type: House::Range, minimum: 100
+    status_report :'documents.count', clazz: Document, scope: :active, type: Mercy::Range, minimum: 100
     status_report :'documents.errors', clazz: Document, scope: :'active.with_error', type: :range, maximum: 1000
 
     def status
@@ -57,14 +57,14 @@ with error and render the report
  
   Remembering that each report may have its onw parameters
 
- - ```House::Error```
+ - ```Mercy::Error```
    - scope: scope to be fetched when trying to find objects with error (default: :with_error)
    - external_key: column to be exposed as id for the objects with error
    - threshold: default report threshold (default: 0.02)
    - base_scope: scope to be universal sample
    - uniq: when the output ids should not be repeated
    - limit: limit of ids to be outputed
- - ```House::Range```
+ - ```Mercy::Range```
    - scope: scope of the query to be counted
    - maximum: max value accepted in the range
    - minimum: minimum value accepted in the range

@@ -1,4 +1,4 @@
-module Bidu
+module Mercy
   class PeriodParser
     class << self
       def parse(period)

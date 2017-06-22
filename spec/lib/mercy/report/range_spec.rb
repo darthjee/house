@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Bidu::House::Report::Range do
+describe Mercy::Report::Range do
   let(:errors) { 1 }
   let(:successes) { 1 }
   let(:old_errors) { 2 }

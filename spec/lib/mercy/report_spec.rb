@@ -1,15 +1,15 @@
 require 'spec_helper'
 
-describe Bidu::House::Report do
-  class Bidu::House::Report::Dummy1 < Bidu::House::Report
+describe Mercy::Report do
+  class Mercy::Report::Dummy1 < Mercy::Report
     DEFAULT_OPTION = {
       option_value: 1,
       other_option: 10
     }
     json_parse :option_value, :other_option, case: :snake
   end
-  class Bidu::House::Report::Dummy2 < Bidu::House::Report::Dummy1; end
-  class Bidu::House::Report::Dummy3 < Bidu::House::Report::Dummy1
+  class Mercy::Report::Dummy2 < Mercy::Report::Dummy1; end
+  class Mercy::Report::Dummy3 < Mercy::Report::Dummy1
     DEFAULT_OPTION = { option_value: 5 }
   end
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Bidu::PeriodParser do
+describe Mercy::PeriodParser do
   shared_examples 'a class who knows how to parse time' do |tests|
     tests.each do |string, expected|
       it "parses #{string} into #{expected} seconds" do

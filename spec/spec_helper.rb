@@ -3,15 +3,10 @@ SimpleCov.profiles.define 'gem' do
   add_filter '/spec/'
 end
 
-if ENV['CODECLIMATE_REPO_TOKEN']
-  require "codeclimate-test-reporter"
-  CodeClimate::TestReporter.start
-end
-
 SimpleCov.start 'gem'
 
 require 'pry-nav'
-require 'bidu/house'
+require 'mercy'
 
 require 'active_record'
 ActiveRecord::Base.establish_connection(adapter: "sqlite3", database: ":memory:")

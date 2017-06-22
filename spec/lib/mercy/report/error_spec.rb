@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Bidu::House::Report::Error do
+describe Mercy::Report::Error do
   let(:errors) { 1 }
   let(:successes) { 1 }
   let(:old_errors) { 2 }
