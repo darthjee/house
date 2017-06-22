@@ -1,11 +1,11 @@
 module Bidu
-  module House
+  module Mercy
     class Report
       include JsonParser
-      require 'bidu/house/report/active_record'
-      require 'bidu/house/report/error'
-      require 'bidu/house/report/range'
-      require 'bidu/house/report/multiple'
+      require 'bidu/mercy/report/active_record'
+      require 'bidu/mercy/report/error'
+      require 'bidu/mercy/report/range'
+      require 'bidu/mercy/report/multiple'
       ALLOWED_PARAMETERS = []
       DEFAULT_OPTION = {}
 

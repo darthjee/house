@@ -1,3 +1,3 @@
 module Bidu
-  require 'bidu/house'
+  require 'bidu/mercy'
 end

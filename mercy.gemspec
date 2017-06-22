@@ -1,14 +1,14 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'bidu/house/version'
+require 'bidu/mercy/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = 'bidu-house'
-  gem.version       = Bidu::House::VERSION
+  gem.name          = 'bidu-mercy'
+  gem.version       = Bidu::Mercy::VERSION
   gem.authors       = ["Bidu Dev's Team"]
   gem.email         = ["dev@bidu.com.br"]
-  gem.homepage      = 'https://github.com/Bidu/house'
+  gem.homepage      = 'https://github.com/Bidu/mercy'
   gem.description   = 'Gem for easy health check'
   gem.summary       = gem.description
 

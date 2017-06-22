@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Bidu::House::ReportConfig do
+describe Bidu::Mercy::ReportConfig do
   let(:config) { {} }
   let(:parameters) { {} }
   let(:subject) { described_class.new(config) }
@@ -8,7 +8,7 @@ describe Bidu::House::ReportConfig do
   describe '#build' do
     context 'when no config is given' do
       it do
-        expect(subject.build(parameters)).to be_a(Bidu::House::Report::Error)
+        expect(subject.build(parameters)).to be_a(Bidu::Mercy::Report::Error)
       end
     end
 
@@ -16,15 +16,15 @@ describe Bidu::House::ReportConfig do
       let(:config) { { type: :dummy } }
 
       it do
-        expect(subject.build(parameters)).to be_a(Bidu::House::Report::Dummy)
+        expect(subject.build(parameters)).to be_a(Bidu::Mercy::Report::Dummy)
       end
     end
 
     context 'when a class is given as type' do
-      let(:config) { { type: Bidu::House::Report::Dummy } }
+      let(:config) { { type: Bidu::Mercy::Report::Dummy } }
 
       it do
-        expect(subject.build(parameters)).to be_a(Bidu::House::Report::Dummy)
+        expect(subject.build(parameters)).to be_a(Bidu::Mercy::Report::Dummy)
       end
     end
 

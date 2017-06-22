@@ -1,5 +1,5 @@
 module Bidu
-  module House
+  module Mercy
     class Report
       class Dummy < Report
         ALLOWED_PARAMETERS=[:period, :threshold]

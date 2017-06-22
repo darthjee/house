@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Bidu::House::StatusBuilder do
+describe Bidu::Mercy::ReportBuilder do
   let(:errors) { 1 }
   let(:successes) { 3 }
   let(:old_errors) { 2 }
@@ -12,17 +12,16 @@ describe Bidu::House::StatusBuilder do
     {
       period: period,
       threshold: threshold,
-      scope: :with_error,
-      clazz: Document,
-      id: :failures,
       external_key: :external_id,
-      on: key
+      scope: :with_error,
+      id: key,
+      clazz: Document
     }
   end
   let(:parameters) { {} }
-  let(:status) { subject.build(key, parameters) }
+  let(:report) { subject.build(key, parameters) }
   before do
-    subject.add_report_config(key, config)
+    subject.add_config(key, config)
     Document.all.each(&:destroy)
     successes.times { |i| Document.create status: :success, external_id: 30+i }
     errors.times { |i| Document.create status: :error, external_id: 10+i }
@@ -33,51 +32,40 @@ describe Bidu::House::StatusBuilder do
 
   describe '#build' do
     let(:ids) { [ 10 ] }
-    let(:status_expected) { :error }
-    let(:percentage) { 0.25 }
-    let(:json_expected) do
-       {
-         status: status_expected,
-         failures: {
-           ids: ids,
-           percentage: percentage,
-           status: status_expected
-         }
-       }
-    end
-
     it do
-      expect(status).to be_a(Bidu::House::Status)
-    end
-
-    context 'when not specifying where to report' do
-      let(:key) {}
-
-      it 'register report under default' do
-        expect(subject.build(:default).as_json).to eq(json_expected)
-      end
+      expect(report).to be_a(Bidu::Mercy::Report::Error)
     end
 
     it 'builds the report using the given configuration' do
-      expect(status.as_json).to eq(json_expected)
+      expect(report.as_json).to eq( ids: ids, percentage: 0.25, status: :error )
+      expect(report.error?).to be_truthy
     end
 
     context 'when passing a custom threshold parameter' do
       let(:parameters) { { threshold: 1 } }
-      let(:status_expected) { :ok }
 
       it 'uses custom threshold parameter' do
-        expect(status.as_json).to eq(json_expected)
+        expect(report.error?).to be_falsey
       end
     end
 
     context 'when passing a custom period parameter' do
-      let(:ids) { [ 10, 20, 21 ] }
-      let(:percentage) { 0.5 }
-      let(:parameters) { { threshold: 0.4, period: 10.days } }
+      let(:parameters) { { threshold: 0.4, period: 10.days, status: :error } }
 
       it 'uses custom period parameter' do
-        expect(status.as_json).to eq(json_expected)
+        expect(report.error?).to be_truthy
+      end
+    end
+
+    context 'when passing a custom other parameters' do
+      let(:parameters) do
+        { scope: :with_success, clazz: Bidu::Mercy::Report::Error, external_key: :id, id: :failures }
+      end
+
+      it 'ignores the non customizable parameters' do
+        expect(report.as_json).to eq( ids: ids, percentage: 0.25, status: :error )
+        expect(report.error?).to be_truthy
+        expect(report.id).to eq(:errors)
       end
     end
   end

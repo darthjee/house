@@ -1,4 +1,4 @@
-module Bidu::House::Report::Multiple
+module Bidu::Mercy::Report::Multiple
   def as_json
     {
       status: status

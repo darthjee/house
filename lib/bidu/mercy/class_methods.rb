@@ -1,5 +1,5 @@
 module Bidu
-  module House
+  module Mercy
     module ClassMethods
 
       def status_report(*attr_names)
@@ -12,7 +12,7 @@ module Bidu
       end
 
       def status_builder
-        @status_builder ||= Bidu::House::StatusBuilder.new
+        @status_builder ||= Bidu::Mercy::StatusBuilder.new
       end
     end
   end

@@ -1,8 +1,8 @@
 module Bidu
-  module House
+  module Mercy
     class StatusBuilder
       def build(key, parameters = {})
-        Bidu::House::Status.new(reports_for(key, parameters))
+        Bidu::Mercy::Status.new(reports_for(key, parameters))
       end
 
       def add_report_config(key, config)
@@ -14,7 +14,7 @@ module Bidu
       private
 
       def report_builder
-        @report_builder ||= Bidu::House::ReportBuilder.new
+        @report_builder ||= Bidu::Mercy::ReportBuilder.new
       end
 
       def reports_for(key, parameters)

@@ -1,5 +1,5 @@
 module Bidu
-  module House
+  module Mercy
     extend ActiveSupport::Concern
 
     def render_status(key = :default)

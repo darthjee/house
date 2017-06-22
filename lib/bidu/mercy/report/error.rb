@@ -1,5 +1,5 @@
 module Bidu
-  module House
+  module Mercy
     class Report
       class Error < Report::ActiveRecord
         ALLOWED_PARAMETERS=[:period, :threshold]

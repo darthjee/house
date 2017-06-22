@@ -1,5 +1,5 @@
 module Bidu
-  module House
+  module Mercy
     class ReportBuilder
       def build(key, parameters = {})
         config = config_for(key)
@@ -7,7 +7,7 @@ module Bidu
       end
 
       def add_config(key, config)
-        configs[key] = Bidu::House::ReportConfig.new(config)
+        configs[key] = Bidu::Mercy::ReportConfig.new(config)
       end
 
       private

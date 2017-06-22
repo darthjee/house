@@ -1,5 +1,5 @@
 module Bidu
-  module House
+  module Mercy
     class ReportConfig
       attr_accessor :config
 
@@ -22,7 +22,7 @@ module Bidu
 
       def report_class
         return type if type.is_a?(Class)
-        @report_class ||= Bidu::House::Report.const_get(type.to_s.camelize)
+        @report_class ||= Bidu::Mercy::Report.const_get(type.to_s.camelize)
       end
 
       def slice_parameters(parameters)

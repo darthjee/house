@@ -1,5 +1,5 @@
 module Bidu
-  module House
+  module Mercy
     class Status
       attr_reader :reports
 
