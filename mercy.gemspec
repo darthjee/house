@@ -5,7 +5,7 @@ require 'mercy/version'
 
 Gem::Specification.new do |gem|
   gem.name          = 'mercy'
-  gem.version       = Bidu::Mercy::VERSION
+  gem.version       = Mercy::VERSION
   gem.authors       = ["Bidu Dev's Team"]
   gem.email         = ["dev@bidu.com.br"]
   gem.homepage      = 'https://github.com/Bidu/mercy'
