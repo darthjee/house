@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'bidu/mercy/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = 'bidu-mercy'
+  gem.name          = 'mercy'
   gem.version       = Bidu::Mercy::VERSION
   gem.authors       = ["Bidu Dev's Team"]
   gem.email         = ["dev@bidu.com.br"]
