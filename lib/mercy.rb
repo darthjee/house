@@ -1,7 +1,7 @@
 require 'darthjee/active_ext'
 require 'concern_builder'
 require 'darthjee/core_ext'
-require 'bidu/period_parser'
+require 'mercy/period_parser'
 require 'json_parser'
 require 'json_parser/type_cast_ext'
 
