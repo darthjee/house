@@ -1,27 +1,25 @@
-module Bidu
-  module Mercy
-    class Status
-      attr_reader :reports
+module Mercy
+  class Status
+    attr_reader :reports
 
-      def initialize(reports)
-        @reports = reports
-      end
+    def initialize(reports)
+      @reports = reports
+    end
 
-      def status
-        reports.any? { |r| r.error? } ? :error : :ok
-      end
+    def status
+      reports.any? { |r| r.error? } ? :error : :ok
+    end
 
-      def as_json
-        {
-          status: status
-        }.merge(reports_jsons)
-      end
+    def as_json
+      {
+        status: status
+      }.merge(reports_jsons)
+    end
 
-      private
+    private
 
-      def reports_jsons
-        reports.map(&:as_json).as_hash(reports.map(&:id))
-      end
+    def reports_jsons
+      reports.map(&:as_json).as_hash(reports.map(&:id))
     end
   end
 end
