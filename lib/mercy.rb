@@ -1,5 +1,4 @@
 require 'darthjee/active_ext'
-require 'concern_builder'
 require 'darthjee/core_ext'
 require 'mercy/period_parser'
 require 'json_parser'

@@ -21,7 +21,6 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'sinclair', '~> 1.0.0'
   gem.add_runtime_dependency 'darthjee-active_ext', '>= 1.3.1'
   gem.add_runtime_dependency 'json_parser', '>= 1.2'
-  gem.add_runtime_dependency 'concern_builder'
 
   gem.add_development_dependency 'activerecord', '~> 5.x'
   gem.add_development_dependency "sqlite3"
