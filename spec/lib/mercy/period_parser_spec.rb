@@ -1,15 +1,9 @@
 require 'spec_helper'
 
 describe Mercy::PeriodParser do
-  shared_examples 'a class who knows how to parse time' do |tests|
-    tests.each do |string, expected|
-      it "parses #{string} into #{expected} seconds" do
-        expect(described_class.parse(string)).to eq(expected)
-      end
-    end
-  end
+  subject { described_class }
 
-  it_behaves_like 'a class who knows how to parse time', {
+  it_behaves_like 'a method that knows how to parse time', :parse, {
     '3' => 3.seconds,
     '3seconds' => 3.seconds,
     '3minutes' => 3.minutes,
