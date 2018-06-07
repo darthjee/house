@@ -9,7 +9,7 @@ describe Mercy::Report::Multiple do
       external_key: :external_id
     }
 
-    json_parse :doc_type, case: :snake
+    expose :doc_type, case: :snake
 
     def base
       super.where(doc_type: doc_type)
@@ -21,7 +21,7 @@ describe Mercy::Report::Multiple do
     DEFAULT_OPTION = {
       doc_type: [:a, :b]
     }
-    json_parse :doc_type, case: :snake
+    expose :doc_type, case: :snake
 
     def reports_ids
       [ doc_type ].flatten

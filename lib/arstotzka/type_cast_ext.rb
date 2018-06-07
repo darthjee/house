@@ -1,4 +1,4 @@
-module JsonParser
+module Arstotzka
   module TypeCast
     def to_period(value)
       Mercy::PeriodParser.parse(value)

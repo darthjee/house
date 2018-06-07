@@ -1,7 +1,7 @@
 module Mercy
   class Report::ActiveRecord < Report
-    json_parse :period, type: :period
-    json_parse :clazz, :base_scope, case: :snake
+    expose :period, type: :period
+    expose :clazz, :base_scope, case: :snake
 
     private
 

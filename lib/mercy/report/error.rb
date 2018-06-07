@@ -11,8 +11,8 @@ module Mercy
         uniq: false
       }
 
-      json_parse :threshold, type: :float
-      json_parse :scope, :external_key, :uniq, :limit, case: :snake
+      expose :threshold, type: :float
+      expose :scope, :external_key, :uniq, :limit, case: :snake
 
       def initialize(options)
         super(self.class::DEFAULT_OPTION.merge(options))

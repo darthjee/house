@@ -6,7 +6,7 @@ describe Mercy::Report do
       option_value: 1,
       other_option: 10
     }
-    json_parse :option_value, :other_option, case: :snake
+    expose :option_value, :other_option, case: :snake
   end
   class Mercy::Report::Dummy2 < Mercy::Report::Dummy1; end
   class Mercy::Report::Dummy3 < Mercy::Report::Dummy1

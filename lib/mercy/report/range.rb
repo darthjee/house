@@ -9,8 +9,8 @@ module Mercy
         maximum: nil
       }
 
-      json_parse :scope
-      json_parse :minimum, :maximum, type: :integer
+      expose :scope
+      expose :minimum, :maximum, type: :integer
 
       def initialize(options)
         super(DEFAULT_OPTION.merge(options))

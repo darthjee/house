@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe JsonParser::TypeCast do
+describe Arstotzka::TypeCast do
   subject { dummy_class.new }
 
-  let(:dummy_class) { Class.new { include JsonParser::TypeCast } }
+  let(:dummy_class) { Class.new { include Arstotzka::TypeCast } }
 
   describe '#to_period' do
     it_behaves_like 'a method that knows how to parse time', :to_period, {
