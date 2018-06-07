@@ -5,12 +5,11 @@ module Mercy
       DEFAULT_OPTION = {
         period: 1.day,
         scope: :all,
-        minimum: nil,
-        maximum: nil
       }
 
       expose :scope
-      expose :minimum, :maximum, type: :integer
+      expose :maximum, type: :infinity_float, default: 'inf'
+      expose :minimum, type: :infinity_float, default: '-inf'
 
       def initialize(options)
         super(DEFAULT_OPTION.merge(options))
@@ -42,10 +41,7 @@ module Mercy
       end
 
       def count_in_range?
-        return range.include?(count) unless (maximum.nil? || minimum.nil?)
-        return count >= minimum unless minimum.nil?
-        return count <= maximum unless maximum.nil?
-        true
+        return range.include?(count)
       end
     end
   end

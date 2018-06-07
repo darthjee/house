@@ -16,7 +16,7 @@ describe Mercy::Report::Range do
       clazz: Document,
       minimum: minimum,
       maximum: maximum
-    }
+    }.clean
   end
   let(:subject) { described_class.new(options) }
   let(:types) { [:a] }
