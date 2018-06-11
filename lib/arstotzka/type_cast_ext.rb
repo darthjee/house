@@ -5,6 +5,7 @@ module Arstotzka
     end
 
     def to_infinity_float(value)
+      return value if value.is_a?(Numeric)
       return -Float::INFINITY if value.match(/-inf/)
       return Float::INFINITY if value.match(/inf/)
 

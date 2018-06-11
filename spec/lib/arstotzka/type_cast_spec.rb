@@ -18,15 +18,25 @@ describe Arstotzka::TypeCast do
   end
 
   describe '#to_infinity_float' do
-    context 'when value can be converted to integer' do
-      let(:value) { (Random.rand * 201).to_i - 100 }
+    let(:value) { ((Random.rand * 201).to_i - 100).to_f }
 
+    context 'when value can be converted to integer' do
       it 'converts to integer' do
         expect(subject.to_infinity_float(value.to_s)).to eq(value)
       end
 
       it do
         expect(subject.to_infinity_float(value.to_s)).to be_a(Float)
+      end
+    end
+
+    context 'when value is a number' do
+      it 'converts to integer' do
+        expect(subject.to_infinity_float(value)).to eq(value)
+      end
+
+      it do
+        expect(subject.to_infinity_float(value)).to be_a(Float)
       end
     end
 
