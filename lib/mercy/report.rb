@@ -1,6 +1,6 @@
 module Mercy
   class Report
-    include JsonParser
+    include Arstotzka
     require 'mercy/report/active_record'
     require 'mercy/report/error'
     require 'mercy/report/range'
@@ -10,7 +10,7 @@ module Mercy
 
     attr_reader :json
 
-    json_parse :id, case: :snake
+    expose :id, case: :snake
 
     def initialize(options = {})
       @json = default_option.merge(options)

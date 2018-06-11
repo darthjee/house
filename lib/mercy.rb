@@ -1,9 +1,8 @@
 require 'darthjee/active_ext'
-require 'concern_builder'
 require 'darthjee/core_ext'
 require 'mercy/period_parser'
-require 'json_parser'
-require 'json_parser/type_cast_ext'
+require 'arstotzka'
+require 'arstotzka/type_cast_ext'
 
 module Mercy
   require 'mercy/concern'

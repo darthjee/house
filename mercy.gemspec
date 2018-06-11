@@ -6,9 +6,9 @@ require 'mercy/version'
 Gem::Specification.new do |gem|
   gem.name          = 'mercy'
   gem.version       = Mercy::VERSION
-  gem.authors       = ["Bidu Dev's Team"]
-  gem.email         = ["dev@bidu.com.br"]
-  gem.homepage      = 'https://github.com/Bidu/mercy'
+  gem.authors       = ["Darthjee"]
+  gem.email         = ["darthjee@gmail.com"]
+  gem.homepage      = 'https://github.com/darthjee/mercy'
   gem.description   = 'Gem for easy health check'
   gem.summary       = gem.description
 
@@ -17,12 +17,11 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|gem|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_runtime_dependency 'activesupport'
-  gem.add_runtime_dependency 'concern_builder'
-  gem.add_runtime_dependency 'darthjee-active_ext'
-  gem.add_runtime_dependency 'json_parser', '~> 1.1'
+  gem.add_runtime_dependency 'activesupport', '~> 5.x'
+  gem.add_runtime_dependency 'darthjee-active_ext', '>= 1.3.1'
+  gem.add_runtime_dependency 'arstotzka', '>= 1.0.1'
 
-  gem.add_development_dependency "activerecord"
+  gem.add_development_dependency 'activerecord', '~> 5.x'
   gem.add_development_dependency "sqlite3"
 
   gem.add_development_dependency "bundler"
