@@ -6,9 +6,9 @@ require 'mercy/version'
 Gem::Specification.new do |gem|
   gem.name          = 'mercy'
   gem.version       = Mercy::VERSION
-  gem.authors       = ["Bidu Dev's Team"]
-  gem.email         = ["dev@bidu.com.br"]
-  gem.homepage      = 'https://github.com/Bidu/mercy'
+  gem.authors       = ["Darthjee"]
+  gem.email         = ["darthjee@gmail.com"]
+  gem.homepage      = 'https://github.com/darthjee/mercy'
   gem.description   = 'Gem for easy health check'
   gem.summary       = gem.description
 
