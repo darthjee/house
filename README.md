@@ -1,11 +1,12 @@
 Mercy
 ==========
 
-![mercy](https://raw.githubusercontent.com/darthjee/mercy/master/mercy.jpg)
-
 [![Code Climate](https://codeclimate.com/github/darthjee/mercy/badges/gpa.svg)](https://codeclimate.com/github/darthjee/mercy)
 [![Test Coverage](https://codeclimate.com/github/darthjee/mercy/badges/coverage.svg)](https://codeclimate.com/github/darthjee/mercy/coverage)
 [![Issue Count](https://codeclimate.com/github/darthjee/mercy/badges/issue_count.svg)](https://codeclimate.com/github/darthjee/mercy)
+[![Gem Version](https://badge.fury.io/rb/mercy.svg)](https://badge.fury.io/rb/mercy)
+
+![mercy](https://raw.githubusercontent.com/darthjee/mercy/master/mercy.jpg)
 
 This gem tries to make server monitoring easier and more reliable by adding an easly configurable
 report and making it avaliable in a controller
