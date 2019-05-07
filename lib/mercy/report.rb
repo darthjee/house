@@ -10,6 +10,11 @@ module Mercy
     ALLOWED_PARAMETERS = [].freeze
     DEFAULT_OPTION = {}.freeze
 
+    def self.default_options
+      return {} if self == Report
+      superclass.default_options.merge(self::DEFAULT_OPTION)
+    end
+
     attr_reader :json
 
     expose :id, case: :snake
@@ -34,11 +39,6 @@ module Mercy
 
     def default_option
       self.class.default_options
-    end
-
-    def self.default_options
-      return {} if self == Report
-      superclass.default_options.merge(self::DEFAULT_OPTION)
     end
   end
 end
