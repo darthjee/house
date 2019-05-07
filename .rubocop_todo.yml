@@ -12,13 +12,6 @@
 Metrics/BlockLength:
   Max: 311
 
-# Offense count: 2
-# Configuration parameters: EnforcedStyleForLeadingUnderscores.
-# SupportedStylesForLeadingUnderscores: disallowed, required, optional
-Naming/MemoizedInstanceVariableName:
-  Exclude:
-    - 'lib/mercy/period_parser.rb'
-
 # Offense count: 18
 # Configuration parameters: Prefixes.
 # Prefixes: when, with, without

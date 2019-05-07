@@ -24,11 +24,11 @@ module Mercy
     attr_reader :period
 
     def value
-      @period_value ||= period.gsub(/\D+/, '').to_i
+      @value ||= period.gsub(/\D+/, '').to_i
     end
 
     def type
-      @period_type ||= period.gsub(/\d+/, '')
+      @type ||= period.gsub(/\d+/, '')
     end
   end
 end
