@@ -4,6 +4,12 @@ inherit_from: .rubocop_todo.yml
 AllCops:
   TargetRubyVersion: 2.5
 
+RSpec/AlignLeftLetBrace:
+  Enabled: true
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+    - 'spec/support/shared_*/**/*.rb'
 
 RSpec/AlignLeftLetBrace:
   Enabled: true
