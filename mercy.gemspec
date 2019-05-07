@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency 'activesupport',       '~> 5.x'
   gem.add_runtime_dependency 'darthjee-active_ext', '>= 1.3.1'
-  gem.add_runtime_dependency 'arstotzka',           '>= 1.3.0'
+  gem.add_runtime_dependency 'arstotzka',           '>= 1.3.2'
   gem.add_runtime_dependency 'darthjee-core_ext',   '>= 1.7.4'
 
   gem.add_development_dependency 'activerecord', '~> 5.x'
