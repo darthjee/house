@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mercy
   class Report::ActiveRecord < Report
     expose :period, type: :period
@@ -6,7 +8,7 @@ module Mercy
     private
 
     def fetch_scoped(base, scope)
-      if (scope.is_a?(Symbol))
+      if scope.is_a?(Symbol)
         scope.to_s.split('.').inject(base) do |entries, method|
           entries.public_send(method)
         end

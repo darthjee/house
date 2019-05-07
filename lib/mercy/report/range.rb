@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 module Mercy
   class Report
     class Range < Report::ActiveRecord
-      ALLOWED_PARAMETERS=[:period, :maximum, :minimum]
+      ALLOWED_PARAMETERS = %i[period maximum minimum].freeze
       DEFAULT_OPTION = {
         period: 1.day,
-        scope: :all,
-      }
+        scope: :all
+      }.freeze
 
       expose :scope
       expose :maximum, type: :infinity_float, default: 'inf'
@@ -41,7 +43,7 @@ module Mercy
       end
 
       def count_in_range?
-        return range.include?(count)
+        range.include?(count)
       end
     end
   end

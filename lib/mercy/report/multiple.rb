@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mercy::Report::Multiple
   def as_json
     {
@@ -25,5 +27,3 @@ module Mercy::Report::Multiple
     sub_report_class.new(json.merge(key => id))
   end
 end
-
-
