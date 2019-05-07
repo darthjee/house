@@ -1,3 +1,8 @@
 coverage
 pkg
 Gemfile.lock
+doc
+.yardoc
+measurement
+rubycritic
+**/.*.swp
