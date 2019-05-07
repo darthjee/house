@@ -11,6 +11,10 @@ Mercy
 This gem tries to make server monitoring easier and more reliable by adding an easly configurable
 report and making it avaliable in a controller
 
+Yard Documentation
+-------------------
+https://www.rubydoc.info/gems/mercy/1.5.0
+
 Getting started
 ---------------
 1. Add Mercy to your `Gemfile` and `bundle install`:
