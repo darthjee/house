@@ -135,7 +135,7 @@ describe Mercy::Report::Error do
       let(:errors)     { 1 }
       let(:successes)  { 3 }
 
-      context 'as symbol' do
+      context 'with symbol' do
         let(:scope) { :'with_error.type_b' }
 
         it 'fetches from each scope in order' do
@@ -143,7 +143,7 @@ describe Mercy::Report::Error do
         end
       end
 
-      context 'as string where scope' do
+      context 'with string where scope' do
         let(:scope) { "status = 'error' and doc_type = 'b'" }
 
         it 'fetches from each scope in order' do
@@ -151,7 +151,7 @@ describe Mercy::Report::Error do
         end
       end
 
-      context 'as hash where scope' do
+      context 'with hash where scope' do
         let(:scope) { { status: :error, doc_type: :b } }
 
         it 'fetches from each scope in order' do
@@ -166,7 +166,7 @@ describe Mercy::Report::Error do
       let(:errors)     { 1 }
       let(:successes)  { 3 }
 
-      context 'as symbol' do
+      context 'with symbol' do
         let(:base_scope) { :type_b }
 
         it 'fetches from each scope in order' do
@@ -174,7 +174,7 @@ describe Mercy::Report::Error do
         end
       end
 
-      context 'as where clause' do
+      context 'with where clause' do
         let(:base_scope) { "doc_type = 'b'" }
 
         it 'fetches from each scope in order' do
@@ -182,7 +182,7 @@ describe Mercy::Report::Error do
         end
       end
 
-      context 'as hash' do
+      context 'with hash' do
         let(:base_scope) { { doc_type: :b } }
 
         it 'fetches from each scope in order' do
@@ -236,7 +236,7 @@ describe Mercy::Report::Error do
       let(:types) { %i[a b b] }
       let(:old_errors) { 0 }
 
-      context 'as symbol' do
+      context 'with symbol' do
         let(:scope) { :'with_error.type_b' }
 
         it 'fetches from each scope in order' do
@@ -245,7 +245,7 @@ describe Mercy::Report::Error do
         end
       end
 
-      context 'as hash' do
+      context 'with hash' do
         let(:scope) { { status: :error, doc_type: :b } }
 
         it 'fetches from each scope in order' do
@@ -254,7 +254,7 @@ describe Mercy::Report::Error do
         end
       end
 
-      context 'as string where scope' do
+      context 'with string where scope' do
         let(:scope) { "status = 'error' and doc_type = 'b'" }
 
         it 'fetches from each scope in order' do
@@ -268,7 +268,7 @@ describe Mercy::Report::Error do
       let(:types)      { %i[a b b b] }
       let(:old_errors) { 0 }
 
-      context 'as symbol' do
+      context 'with symbol' do
         let(:base_scope) { :type_b }
 
         it 'fetches from each scope in order' do
@@ -277,7 +277,7 @@ describe Mercy::Report::Error do
         end
       end
 
-      context 'as where clause' do
+      context 'with where clause' do
         let(:base_scope) { "doc_type = 'b'" }
 
         it 'fetches from each scope in order' do
@@ -286,7 +286,7 @@ describe Mercy::Report::Error do
         end
       end
 
-      context 'as hash' do
+      context 'with hash' do
         let(:base_scope) { { doc_type: :b } }
 
         it 'fetches from each scope in order' do
@@ -369,7 +369,7 @@ describe Mercy::Report::Error do
             expect(subject.as_json).to eq(expected)
           end
 
-          context 'and passing uniq option' do
+          context 'when passing uniq option' do
             before { options[:uniq] = true }
 
             let(:ids_expected) { [10] }

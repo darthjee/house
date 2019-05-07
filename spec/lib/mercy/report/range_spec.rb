@@ -201,7 +201,7 @@ describe Mercy::Report::Range do
         let(:old_errors) { 1 }
         let(:old_sucesses) { 2 }
 
-        context 'and the regular documents are not enough' do
+        context 'when the regular documents are not enough' do
           let(:successes) { 1 }
           let(:errors) { 0 }
 
@@ -218,7 +218,7 @@ describe Mercy::Report::Range do
           end
         end
 
-        context 'and the regular documents are almost in the limit' do
+        context 'when the regular documents are almost in the limit' do
           let(:successes) { 2 }
           let(:errors)    { 1 }
 
@@ -252,7 +252,7 @@ describe Mercy::Report::Range do
       let(:scope)  { :'with_error.type_b' }
       let(:errors) { 1 }
 
-      context 'as symbol' do
+      context 'with symbol' do
         let(:scope) { :'with_error.type_b' }
 
         it 'fetches from each scope in order' do
@@ -260,7 +260,7 @@ describe Mercy::Report::Range do
         end
       end
 
-      context 'as string where scope' do
+      context 'with string where scope' do
         let(:scope) { "status = 'error' and doc_type = 'b'" }
 
         it 'fetches from each scope in order' do
@@ -268,7 +268,7 @@ describe Mercy::Report::Range do
         end
       end
 
-      context 'as hash where scope' do
+      context 'with hash where scope' do
         let(:scope) { { status: :error, doc_type: :b } }
 
         it 'fetches from each scope in order' do

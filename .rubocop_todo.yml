@@ -12,20 +12,6 @@
 Metrics/BlockLength:
   Max: 311
 
-# Offense count: 18
-# Configuration parameters: Prefixes.
-# Prefixes: when, with, without
-RSpec/ContextWording:
-  Exclude:
-    - 'spec/lib/mercy/report/error_spec.rb'
-    - 'spec/lib/mercy/report/range_spec.rb'
-
-# Offense count: 1
-# Configuration parameters: CustomTransform, IgnoreMethods.
-RSpec/FilePath:
-  Exclude:
-    - 'spec/lib/mercy/report/report_config_spec.rb'
-
 # Offense count: 11
 # Configuration parameters: AggregateFailuresByDefault.
 RSpec/MultipleExpectations:
