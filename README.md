@@ -13,7 +13,7 @@ report and making it avaliable in a controller
 
 Yard Documentation
 -------------------
-https://www.rubydoc.info/gems/mercy/1.5.0
+https://www.rubydoc.info/gems/mercy/1.6.0
 
 Getting started
 ---------------
