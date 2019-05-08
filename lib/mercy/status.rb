@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mercy
   class Status
     attr_reader :reports
@@ -7,7 +9,7 @@ module Mercy
     end
 
     def status
-      reports.any? { |r| r.error? } ? :error : :ok
+      reports.any?(&:error?) ? :error : :ok
     end
 
     def as_json

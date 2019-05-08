@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'darthjee/active_ext'
 require 'darthjee/core_ext'
 require 'mercy/period_parser'

@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Mercy::Status do
   let(:threshold) { 0.02 }
-  let(:period) { 1.day }
+  let(:period)    { 1.day }
   let(:report_options) do
     {
       period: period,
@@ -19,13 +21,14 @@ describe Mercy::Status do
     )
   end
   let(:errors) { 0 }
-  let(:successes) { 1 }
+  let(:successes)    { 1 }
   let(:error_report) { Mercy::Report::Error.new(report_options) }
   let(:success_report) do
     Mercy::Report::Error.new(success_options)
   end
-  let(:reports) { [ error_report ] }
+  let(:reports) { [error_report] }
   let(:subject) { described_class.new(reports) }
+
   before do
     Document.all.each(&:destroy)
     errors.times { Document.create status: :error }
@@ -42,7 +45,6 @@ describe Mercy::Status do
       end
 
       it 'returns the report json' do
-
       end
     end
 
@@ -58,7 +60,7 @@ describe Mercy::Status do
       let(:success_report) do
         Mercy::Report::Error.new(report_options.merge(scope: :with_success))
       end
-      let(:reports) { [ success_report, error_report ] }
+      let(:reports) { [success_report, error_report] }
 
       it 'returns a json with error' do
         expect(status).to eq(:error)
@@ -82,7 +84,7 @@ describe Mercy::Status do
     end
 
     context 'when there are both success and error reports' do
-      let(:reports) { [ success_report, error_report ] }
+      let(:reports) { [success_report, error_report] }
 
       it do
         expect(subject.status).to eq(:error)
@@ -125,7 +127,7 @@ describe Mercy::Status do
           }
         }
       end
-      let(:reports) { [ success_report, error_report ] }
+      let(:reports) { [success_report, error_report] }
 
       it 'creates a summary of all the reports' do
         expect(subject.as_json).to eq(expected)

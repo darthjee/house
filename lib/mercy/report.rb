@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mercy
   class Report
     include Arstotzka
@@ -5,8 +7,13 @@ module Mercy
     require 'mercy/report/error'
     require 'mercy/report/range'
     require 'mercy/report/multiple'
-    ALLOWED_PARAMETERS = []
-    DEFAULT_OPTION = {}
+    ALLOWED_PARAMETERS = [].freeze
+    DEFAULT_OPTION = {}.freeze
+
+    def self.default_options
+      return {} if self == Report
+      superclass.default_options.merge(self::DEFAULT_OPTION)
+    end
 
     attr_reader :json
 
@@ -32,11 +39,6 @@ module Mercy
 
     def default_option
       self.class.default_options
-    end
-
-    def self.default_options
-      return {} if self == Report
-      self.superclass.default_options.merge(self::DEFAULT_OPTION)
     end
   end
 end

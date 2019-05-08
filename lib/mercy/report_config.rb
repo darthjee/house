@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mercy
   class ReportConfig
     attr_accessor :config

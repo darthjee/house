@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mercy
   class StatusBuilder
     def build(key, parameters = {})

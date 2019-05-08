@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Mercy
   class Report
     class Error < Report::ActiveRecord
-      ALLOWED_PARAMETERS=[:period, :threshold]
+      ALLOWED_PARAMETERS = %i[period threshold].freeze
       DEFAULT_OPTION = {
         external_key: :id,
         threshold: 0.02,
@@ -9,7 +11,7 @@ module Mercy
         scope: :with_error,
         base_scope: :all,
         uniq: false
-      }
+      }.freeze
 
       expose :threshold, type: :float
       expose :scope, :external_key, :uniq, :limit, case: :snake
@@ -49,8 +51,8 @@ module Mercy
       end
 
       def fetch_percentage
-        if (scope.is_a?(Symbol))
-          last_entries.percentage(*(scope.to_s.split('.').map(&:to_sym)))
+        if scope.is_a?(Symbol)
+          last_entries.percentage(*scope.to_s.split('.').map(&:to_sym))
         else
           last_entries.percentage(scope)
         end

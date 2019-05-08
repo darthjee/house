@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mercy
   class PeriodParser
     class << self
@@ -13,7 +15,7 @@ module Mercy
     end
 
     def to_seconds
-      return unless period.match(/^\d+(years|months|days|hours|minutes|seconds)?/)
+      return unless period =~ /^\d+(years|months|days|hours|minutes|seconds)?/
       type.blank? ? value.seconds : value.public_send(type)
     end
 
@@ -22,11 +24,11 @@ module Mercy
     attr_reader :period
 
     def value
-      @period_value ||= period.gsub(/\D+/, '').to_i
+      @value ||= period.gsub(/\D+/, '').to_i
     end
 
     def type
-      @period_type ||= period.gsub(/\d+/, '')
+      @type ||= period.gsub(/\d+/, '')
     end
   end
 end

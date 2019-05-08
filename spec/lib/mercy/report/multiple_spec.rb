@@ -1,45 +1,12 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Mercy::Report::Multiple do
-  class Mercy::Report::DocTypeError < Mercy::Report::Error
-    ALLOWED_PARAMETERS=[:period, :threshold]
-    DEFAULT_OPTION = {
-      threshold: 0.25,
-      clazz: Document,
-      external_key: :external_id
-    }
-
-    expose :doc_type, case: :snake
-
-    def base
-      super.where(doc_type: doc_type)
-    end
-  end
-
-  class Mercy::Report::Multiple::Dummy < Mercy::Report
-    include Mercy::Report::Multiple
-    DEFAULT_OPTION = {
-      doc_type: [:a, :b]
-    }
-    expose :doc_type, case: :snake
-
-    def reports_ids
-      [ doc_type ].flatten
-    end
-
-    def sub_report_class
-      Mercy::Report::DocTypeError
-    end
-
-    def key
-      :doc_type
-    end
-  end
-
-  let(:subject) { described_class::Dummy.new }
-  let(:a_errors) { 1 }
+  let(:subject)     { described_class::Dummy.new }
+  let(:a_errors)    { 1 }
   let(:a_successes) { 1 }
-  let(:b_errors) { 1 }
+  let(:b_errors)    { 1 }
   let(:b_successes) { 1 }
   let(:setup) do
     {
@@ -50,10 +17,13 @@ describe Mercy::Report::Multiple do
 
   before do
     Document.delete_all
+
     setup.each do |status, map|
       map.each do |doc_type, quantity|
         quantity.times do
-          Document.create(status: status, doc_type: doc_type, external_id: Document.count)
+          Document.create(
+            status: status, doc_type: doc_type, external_id: Document.count
+          )
         end
       end
     end
@@ -61,20 +31,20 @@ describe Mercy::Report::Multiple do
 
   describe '#error?' do
     context 'when all subreports are with error' do
-      it { expect(subject.error?).to be_truthy }
+      it { expect(subject).to be_error }
     end
 
     context 'when one of the reports is not an error' do
       let(:a_successes) { 4 }
 
-      it { expect(subject.error?).to be_truthy }
+      it { expect(subject).to be_error }
     end
 
     context 'when none of the reports is an error' do
       let(:a_successes) { 4 }
       let(:b_successes) { 4 }
 
-      it { expect(subject.error?).to be_falsey }
+      it { expect(subject).not_to be_error }
     end
   end
 
@@ -119,4 +89,3 @@ describe Mercy::Report::Multiple do
     end
   end
 end
-
