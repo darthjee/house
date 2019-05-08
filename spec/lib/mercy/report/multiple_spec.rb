@@ -3,41 +3,6 @@
 require 'spec_helper'
 
 describe Mercy::Report::Multiple do
-  class Mercy::Report::DocTypeError < Mercy::Report::Error
-    ALLOWED_PARAMETERS = %i[period threshold].freeze
-    DEFAULT_OPTION = {
-      threshold: 0.25,
-      clazz: Document,
-      external_key: :external_id
-    }.freeze
-
-    expose :doc_type, case: :snake
-
-    def base
-      super.where(doc_type: doc_type)
-    end
-  end
-
-  class Mercy::Report::Multiple::Dummy < Mercy::Report
-    include Mercy::Report::Multiple
-    DEFAULT_OPTION = {
-      doc_type: %i[a b]
-    }.freeze
-    expose :doc_type, case: :snake
-
-    def reports_ids
-      [doc_type].flatten
-    end
-
-    def sub_report_class
-      Mercy::Report::DocTypeError
-    end
-
-    def key
-      :doc_type
-    end
-  end
-
   let(:subject)     { described_class::Dummy.new }
   let(:a_errors)    { 1 }
   let(:a_successes) { 1 }

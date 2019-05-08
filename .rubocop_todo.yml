@@ -35,17 +35,6 @@ RSpec/NamedSubject:
 RSpec/NestedGroups:
   Max: 6
 
-# Offense count: 7
-# Cop supports --auto-correct.
-# Configuration parameters: AutoCorrect, EnforcedStyle.
-# SupportedStyles: nested, compact
-Style/ClassAndModuleChildren:
-  Exclude:
-    - 'lib/mercy/report/active_record.rb'
-    - 'lib/mercy/report/multiple.rb'
-    - 'spec/lib/mercy/report/multiple_spec.rb'
-    - 'spec/lib/mercy/report_spec.rb'
-
 # Offense count: 14
 Style/Documentation:
   Exclude:
