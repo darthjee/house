@@ -65,9 +65,3 @@ Style/Documentation:
     - 'lib/mercy/report_config.rb'
     - 'lib/mercy/status.rb'
     - 'lib/mercy/status_builder.rb'
-
-# Offense count: 21
-# Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
-# URISchemes: http, https
-Metrics/LineLength:
-  Max: 110

@@ -26,10 +26,18 @@ describe Mercy::ReportBuilder do
   before do
     subject.add_config(key, config)
     Document.all.each(&:destroy)
-    successes.times { |i| Document.create status: :success, external_id: 30 + i }
-    errors.times { |i| Document.create status: :error, external_id: 10 + i }
+
+    successes.times do |i|
+      Document.create status: :success, external_id: 30 + i
+    end
+
+    errors.times do |i|
+      Document.create status: :error, external_id: 10 + i
+    end
+
     old_errors.times do |i|
-      Document.create status: :error, external_id: 20 + i, created_at: 2.days.ago, updated_at: 2.days.ago
+      Document.create status: :error, external_id: 20 + i,
+                      created_at: 2.days.ago, updated_at: 2.days.ago
     end
   end
 
@@ -63,7 +71,12 @@ describe Mercy::ReportBuilder do
 
     context 'when passing a custom other parameters' do
       let(:parameters) do
-        { scope: :with_success, clazz: Mercy::Report::Error, external_key: :id, id: :failures }
+        {
+          scope: :with_success,
+          clazz: Mercy::Report::Error,
+          external_key: :id,
+          id: :failures
+        }
       end
 
       it 'ignores the non customizable parameters' do

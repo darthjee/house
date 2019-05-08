@@ -27,10 +27,18 @@ describe Mercy::StatusBuilder do
   before do
     subject.add_report_config(key, config)
     Document.all.each(&:destroy)
-    successes.times { |i| Document.create status: :success, external_id: 30 + i }
-    errors.times { |i| Document.create status: :error, external_id: 10 + i }
+
+    successes.times do |i|
+      Document.create status: :success, external_id: 30 + i
+    end
+
+    errors.times do |i|
+      Document.create status: :error, external_id: 10 + i
+    end
+
     old_errors.times do |i|
-      Document.create status: :error, external_id: 20 + i, created_at: 2.days.ago, updated_at: 2.days.ago
+      Document.create status: :error, external_id: 20 + i,
+                      created_at: 2.days.ago, updated_at: 2.days.ago
     end
   end
 

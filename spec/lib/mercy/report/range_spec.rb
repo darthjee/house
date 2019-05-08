@@ -27,14 +27,21 @@ describe Mercy::Report::Range do
     Document.all.each(&:destroy)
     types.each do |type|
       successes.times { Document.create status: :success, doc_type: type }
+
       errors.times do |i|
-        Document.create status: :error, external_id: 10 * successes + i, outter_external_id: i, doc_type: type
+        Document.create status: :error,
+                        external_id: 10 * successes + i,
+                        outter_external_id: i, doc_type: type
       end
+
       old_errors.times do
-        Document.create status: :error, created_at: 2.days.ago, updated_at: 2.days.ago, doc_type: type
+        Document.create status: :error, doc_type: type,
+                        created_at: 2.days.ago, updated_at: 2.days.ago
       end
+
       old_sucesses.times do
-        Document.create status: :success, created_at: 2.days.ago, updated_at: 2.days.ago, doc_type: type
+        Document.create status: :success, doc_type: type,
+                        created_at: 2.days.ago, updated_at: 2.days.ago
       end
     end
   end

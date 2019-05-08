@@ -28,11 +28,15 @@ describe Mercy::Report::Error do
     Document.all.each(&:destroy)
     types.each do |type|
       successes.times { Document.create status: :success, doc_type: type }
+
       errors.times do |i|
-        Document.create status: :error, external_id: 10 * successes + i, outter_external_id: i, doc_type: type
+        Document.create status: :error, doc_type: type,
+                        external_id: 10 * successes + i, outter_external_id: i
       end
+
       old_errors.times do
-        Document.create status: :error, created_at: 2.days.ago, updated_at: 2.days.ago, doc_type: type
+        Document.create status: :error, doc_type: type,
+                        created_at: 2.days.ago, updated_at: 2.days.ago
       end
     end
   end
@@ -240,8 +244,7 @@ describe Mercy::Report::Error do
         let(:scope) { :'with_error.type_b' }
 
         it 'fetches from each scope in order' do
-          expect(subject.scoped.count).to eq(Document.with_error.type_b.count)
-          expect(subject.scoped.count).to eq(2 * Document.with_error.type_a.count)
+          expect(subject.scoped.count).to eq(2)
         end
       end
 
@@ -249,8 +252,7 @@ describe Mercy::Report::Error do
         let(:scope) { { status: :error, doc_type: :b } }
 
         it 'fetches from each scope in order' do
-          expect(subject.scoped.count).to eq(Document.with_error.type_b.count)
-          expect(subject.scoped.count).to eq(2 * Document.with_error.type_a.count)
+          expect(subject.scoped.count).to eq(2)
         end
       end
 
@@ -258,8 +260,7 @@ describe Mercy::Report::Error do
         let(:scope) { "status = 'error' and doc_type = 'b'" }
 
         it 'fetches from each scope in order' do
-          expect(subject.scoped.count).to eq(Document.with_error.type_b.count)
-          expect(subject.scoped.count).to eq(2 * Document.with_error.type_a.count)
+          expect(subject.scoped.count).to eq(2)
         end
       end
     end
@@ -272,8 +273,7 @@ describe Mercy::Report::Error do
         let(:base_scope) { :type_b }
 
         it 'fetches from each scope in order' do
-          expect(subject.scoped.count).to eq(Document.with_error.type_b.count)
-          expect(subject.scoped.count).to eq(3 * Document.with_error.type_a.count)
+          expect(subject.scoped.count).to eq(3)
         end
       end
 
@@ -281,8 +281,7 @@ describe Mercy::Report::Error do
         let(:base_scope) { "doc_type = 'b'" }
 
         it 'fetches from each scope in order' do
-          expect(subject.scoped.count).to eq(Document.with_error.type_b.count)
-          expect(subject.scoped.count).to eq(3 * Document.with_error.type_a.count)
+          expect(subject.scoped.count).to eq(3)
         end
       end
 
@@ -290,8 +289,7 @@ describe Mercy::Report::Error do
         let(:base_scope) { { doc_type: :b } }
 
         it 'fetches from each scope in order' do
-          expect(subject.scoped.count).to eq(Document.with_error.type_b.count)
-          expect(subject.scoped.count).to eq(3 * Document.with_error.type_a.count)
+          expect(subject.scoped.count).to eq(3)
         end
       end
     end
@@ -323,7 +321,11 @@ describe Mercy::Report::Error do
 
   describe '#as_json' do
     let(:expected) do
-      { ids: ids_expected, percentage: percentage_expected, status: status_expected }
+      {
+        ids:        ids_expected,
+        percentage: percentage_expected,
+        status:     status_expected
+      }
     end
 
     context 'when everything is ok' do
@@ -394,7 +396,9 @@ describe Mercy::Report::Error do
       context 'when configurated without external key' do
         before { options.delete(:external_key) }
 
-        let(:ids_expected) { Document.with_error.where('created_at > ?', 30.hours.ago).map(&:id) }
+        let(:ids_expected) do
+          Document.with_error.where('created_at > ?', 30.hours.ago).map(&:id)
+        end
 
         it 'returns the ids as default id' do
           expect(subject.as_json).to eq(expected)

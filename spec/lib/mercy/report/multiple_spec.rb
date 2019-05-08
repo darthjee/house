@@ -52,10 +52,13 @@ describe Mercy::Report::Multiple do
 
   before do
     Document.delete_all
+
     setup.each do |status, map|
       map.each do |doc_type, quantity|
         quantity.times do
-          Document.create(status: status, doc_type: doc_type, external_id: Document.count)
+          Document.create(
+            status: status, doc_type: doc_type, external_id: Document.count
+          )
         end
       end
     end
