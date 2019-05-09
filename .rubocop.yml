@@ -6,10 +6,22 @@ AllCops:
 
 RSpec/AlignLeftLetBrace:
   Enabled: true
+
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*_spec.rb'
     - 'spec/support/shared_*/**/*.rb'
+    - '*.gemspec'
 
 RSpec/AlignLeftLetBrace:
   Enabled: true
+
+Style/MixinUsage:
+  Exclude:
+    - 'spec/dummy/bin/setup'
+    - 'spec/dummy/bin/update'
+
+Metrics/LineLength:
+  Exclude:
+    - 'spec/spec_helper.rb'
+    - 'spec/dummy/config/**/*.rb'

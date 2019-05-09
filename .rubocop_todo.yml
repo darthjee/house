@@ -54,3 +54,4 @@ Style/Documentation:
     - 'lib/mercy/report_config.rb'
     - 'lib/mercy/status.rb'
     - 'lib/mercy/status_builder.rb'
+    - 'spec/dummy/**/*.rb'

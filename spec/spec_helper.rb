@@ -16,6 +16,10 @@ ActiveRecord::Base.establish_connection(
   adapter: 'sqlite3', database: ':memory:'
 )
 
+require File.expand_path('spec/dummy/config/environment')
+require 'rspec/rails'
+require 'active_support/railtie'
+
 support_files = File.expand_path('spec/support/**/*.rb')
 Dir[support_files].sort.each { |file| require file }
 
@@ -25,7 +29,4 @@ RSpec.configure do |config|
   config.filter_run_excluding :integration unless ENV['ALL']
 
   config.order = 'random'
-
-  config.before do
-  end
 end
