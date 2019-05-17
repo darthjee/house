@@ -5,7 +5,9 @@ require 'spec_helper'
 describe DocumentReportController, type: :controller do
   context 'when all reports are successful' do
     let(:successes_a)     { 0 }
+    let(:successes_b)     { 0 }
     let(:errors_a)        { 0 }
+    let(:errors_b)        { 0 }
     let(:error_documents) { Document.with_error }
 
     let(:parsed_response) do
@@ -14,8 +16,11 @@ describe DocumentReportController, type: :controller do
 
     before do
       Document.delete_all
-      errors_a.times    { Document.with_error.create }
-      successes_a.times { Document.with_success.create }
+
+      successes_a.times { Document.with_success.type_a.create }
+      successes_b.times { Document.with_success.type_b.create }
+      errors_a.times    { Document.with_error.type_a.create }
+      errors_b.times    { Document.with_error.type_b.create }
 
       get :status
     end
@@ -25,6 +30,11 @@ describe DocumentReportController, type: :controller do
         {
           status: 'ok',
           error_a: {
+            ids:        [],
+            percentage: 0,
+            status:     'ok'
+          },
+          error_b: {
             ids:        [],
             percentage: 0,
             status:     'ok'
@@ -52,6 +62,11 @@ describe DocumentReportController, type: :controller do
             ids:        error_documents.pluck(:id),
             percentage: 0.75,
             status:     'error'
+          },
+          error_b: {
+            ids:        [],
+            percentage: 0,
+            status:     'ok'
           }
         }.deep_stringify_keys
       end
@@ -66,13 +81,18 @@ describe DocumentReportController, type: :controller do
     end
 
     context 'when there are errors below the threshold' do
-      let(:errors_a)    { 1 }
       let(:successes_a) { 49 }
+      let(:errors_b)    { 1 }
 
       let(:expected_response) do
         {
           status: 'ok',
           error_a: {
+            ids:        [],
+            percentage: 0,
+            status:     'ok'
+          },
+          error_b: {
             ids:        error_documents.pluck(:id),
             percentage: 0.02,
             status:     'ok'
