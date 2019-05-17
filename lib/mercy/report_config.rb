@@ -27,7 +27,9 @@ module Mercy
     end
 
     def slice_parameters(parameters)
-      parameters.permit(*allowed_parameters)
+      parameters.respond_to?(:permit) ?
+        parameters.permit(*allowed_parameters) :
+        parameters.slice(*allowed_parameters)
     end
 
     def allowed_parameters

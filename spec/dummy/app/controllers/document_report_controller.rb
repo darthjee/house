@@ -3,7 +3,7 @@
 class DocumentReportController < ApplicationController
   include Mercy
 
-  status_report :error, clazz: Document
+  status_report :error_a, clazz: Document
 
   def status
     render_status
