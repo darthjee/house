@@ -70,6 +70,19 @@ describe DocumentReportController, type: :controller do
       end
     end
 
+    context 'when there are only old documents' do
+      let(:old_errors_1) { 2 }
+      let(:old_errors_b) { 2 }
+
+      it 'ignore old entries' do
+        expect(response).to be_successful
+      end
+
+      it 'returns status json' do
+        expect(parsed_response).to eq(expected_response)
+      end
+    end
+
     context 'when there are errors above the threshold' do
       let(:errors_a)    { 3 }
       let(:successes_a) { 1 }
