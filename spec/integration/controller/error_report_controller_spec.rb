@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe ErrorReportController, type: :controller do
+describe DocumentReportController, type: :controller do
   let(:successes_a)     { 0 }
   let(:successes_b)     { 0 }
   let(:successes_c)     { 0 }

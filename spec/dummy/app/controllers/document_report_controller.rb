@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ErrorReportController < ApplicationController
+class DocumentReportController < ApplicationController
   include Mercy
 
   status_report :error_a, base_scope: :type_a, clazz: Document
