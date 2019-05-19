@@ -8,7 +8,7 @@ class DocumentReportController < ApplicationController
   status_report :error_c, clazz: Document, threshold: 0.5,
     scope: "status = 'error'", base_scope: "doc_type = 'c'"
 
-  def status
+  def error_status
     render_status
   end
 end

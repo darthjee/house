@@ -2,6 +2,6 @@
 
 Rails.application.routes.draw do
   resources :document_report, only: [] do
-    get :status, on: :collection
+    get :error_status, on: :collection
   end
 end
