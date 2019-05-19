@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe DocumentReportController, type: :controller do
+describe ErrorReportController, type: :controller do
   context 'when all reports are successful' do
     let(:successes_a)     { 0 }
     let(:successes_b)     { 0 }
