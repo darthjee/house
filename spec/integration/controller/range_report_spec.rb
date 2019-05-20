@@ -6,8 +6,10 @@ describe DocumentReportController, type: :controller do
   describe 'range reports' do
     let(:parameters) { {} }
 
-    let(:successes) { 0 }
-    let(:errors)    { 0 }
+    let(:successes)     { 0 }
+    let(:errors)        { 0 }
+    let(:old_successes) { 11 }
+    let(:old_errors)    { 11 }
 
     let(:expected_status)       { 'ok' }
     let(:expected_total_count)  { 0 }
@@ -36,13 +38,20 @@ describe DocumentReportController, type: :controller do
     before do
       Document.delete_all
 
-      successes.times { Document.with_success.create }
-      errors.times    { Document.with_error.create }
+      successes.times     { Document.with_success.create }
+      errors.times        { Document.with_error.create }
+      old_successes.times do
+        Document.with_success.create(updated_at: 1.day.ago)
+      end
+      old_errors.times do
+        Document.with_error.create(updated_at: 1.day.ago)
+      end
 
       get :range_status, params: parameters
     end
 
-    context 'when there are no documents' do
+    context 'when there are no documents for the given period' do
+      let(:old_successes)         { 10 }
       let(:expected_status)       { 'error' }
       let(:expected_total_status) { 'error' }
 
@@ -86,6 +95,60 @@ describe DocumentReportController, type: :controller do
 
       it 'returns status json' do
         expect(parsed_response).to eq(expected_response)
+      end
+    end
+
+    context 'when passing params' do
+      context 'when passing period' do
+        let(:parameters) { { period: '2days' } }
+
+        let(:expected_status)       { 'error' }
+        let(:expected_total_count)  { 22 }
+        let(:expected_total_status) { 'ok' }
+        let(:expected_error_count)  { 11 }
+        let(:expected_error_status) { 'error' }
+
+        it 'fails due to maximum threshold' do
+          expect(response.status).to eq(500)
+        end
+
+        it 'returns status json' do
+          expect(parsed_response).to eq(expected_response)
+        end
+      end
+
+      context 'when passing a minimum' do
+        let(:parameters) { { minimum: 3 } }
+
+        context 'when minimun is reached' do
+          let(:errors)    { 4 }
+          let(:successes) { 1 }
+
+          let(:expected_total_count)  { 5 }
+          let(:expected_error_count)  { 4 }
+
+          it 'does not fail' do
+            expect(response).to be_successful
+          end
+
+          it 'returns status json' do
+            expect(parsed_response).to eq(expected_response)
+          end
+        end
+
+        context 'when minimun is not reached' do
+          let(:expected_status)       { 'error' }
+          let(:expected_total_status) { 'error' }
+          let(:expected_error_status) { 'error' }
+
+          it 'fails on error due to minimum' do
+            expect(response.status).to eq(500)
+          end
+
+          it 'returns status json' do
+            expect(parsed_response).to eq(expected_response)
+          end
+        end
       end
     end
   end
