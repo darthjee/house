@@ -150,6 +150,45 @@ describe DocumentReportController, type: :controller do
           end
         end
       end
+
+      context 'when passing a maximum' do
+        let(:parameters) { { maximum: 5 } }
+
+        context 'when maximum is not reached' do
+          let(:errors)    { 2 }
+          let(:successes) { 3 }
+
+          let(:expected_total_count)  { 5 }
+          let(:expected_error_count)  { 2 }
+
+          it 'does not fail' do
+            expect(response).to be_successful
+          end
+
+          it 'returns status json' do
+            expect(parsed_response).to eq(expected_response)
+          end
+        end
+
+        context 'when maximum is reached' do
+          let(:errors)    { 11 }
+          let(:successes) { 1 }
+
+          let(:expected_total_count)  { 12 }
+          let(:expected_error_count)  { 11 }
+          let(:expected_status)       { 'error' }
+          let(:expected_total_status) { 'error' }
+          let(:expected_error_status) { 'error' }
+
+          it 'fails on error due to minimum' do
+            expect(response.status).to eq(500)
+          end
+
+          it 'returns status json' do
+            expect(parsed_response).to eq(expected_response)
+          end
+        end
+      end
     end
   end
 end
