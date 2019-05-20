@@ -13,6 +13,7 @@ describe DocumentReportController, type: :controller do
     let(:old_errors_a)    { 0 }
     let(:old_errors_b)    { 0 }
     let(:old_errors_c)    { 0 }
+
     let(:parameters)      { {} }
 
     let(:error_documents) do
@@ -54,7 +55,6 @@ describe DocumentReportController, type: :controller do
         }
       }.deep_stringify_keys
     end
-
 
     before do
       Document.delete_all
@@ -189,11 +189,11 @@ describe DocumentReportController, type: :controller do
     end
 
     context 'when scope is defined as string' do
-      let(:successes_a)     { 10 }
-      let(:successes_b)     { 10 }
-      let(:successes_c)     { 5 }
-      let(:errors_c)        { 5 }
-      let(:old_errors_c)    { 10 }
+      let(:successes_a)  { 10 }
+      let(:successes_b)  { 10 }
+      let(:successes_c)  { 5 }
+      let(:errors_c)     { 5 }
+      let(:old_errors_c) { 10 }
 
       let(:expected_percentage_type_c) { 0.5 }
       let(:expected_error_ids_type_c)  { error_documents.pluck(:id) }
