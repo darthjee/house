@@ -64,14 +64,14 @@ with error and render the report
  
   Remembering that each report may have its onw parameters
 
- - ```Mercy::Error```
+ - ```Mercy::Report::Error```
    - scope: scope to be fetched when trying to find objects with error (default: :with_error)
    - external_key: column to be exposed as id for the objects with error
    - threshold: default report threshold (default: 0.02)
    - base_scope: scope to be universal sample
    - uniq: when the output ids should not be repeated
    - limit: limit of ids to be outputed
- - ```Mercy::Range```
+ - ```Mercy::Report::Range```
    - scope: scope of the query to be counted
    - maximum: max value accepted in the range
    - minimum: minimum value accepted in the range
