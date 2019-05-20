@@ -25,3 +25,7 @@ Metrics/LineLength:
   Exclude:
     - 'spec/spec_helper.rb'
     - 'spec/dummy/config/**/*.rb'
+
+RSpec/FilePath:
+  Exclude:
+    - 'spec/integration/controller/**/*.rb'
