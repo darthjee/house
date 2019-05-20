@@ -17,6 +17,7 @@ ActiveRecord::Base.establish_connection(
 )
 
 require File.expand_path('spec/dummy/config/environment')
+require File.expand_path('spec/dummy/db/schema.rb')
 require 'rspec/rails'
 require 'active_support/railtie'
 
