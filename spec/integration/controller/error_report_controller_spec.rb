@@ -4,23 +4,12 @@ require 'spec_helper'
 
 describe DocumentReportController, type: :controller do
   describe 'error reports' do
+    include_context 'documents setup'
+
     let(:parameters)      { {} }
-    let(:a_successes)     { 0 }
-    let(:b_successes)     { 0 }
-    let(:c_successes)     { 0 }
-    let(:a_errors)        { 0 }
-    let(:b_errors)        { 0 }
-    let(:c_errors)        { 0 }
     let(:old_a_errors)    { 0 }
     let(:old_b_errors)    { 0 }
     let(:old_c_errors)    { 0 }
-
-    let(:setup) do
-      {
-        success: { a: a_successes, b: b_successes, c: c_successes },
-        error: { a: a_errors, b: b_errors, c: c_errors },
-      }
-    end
 
     let(:error_documents) do
       Document.with_error.where(updated_at: (2.hours.ago..1.minute.from_now))
@@ -63,17 +52,6 @@ describe DocumentReportController, type: :controller do
     end
 
     before do
-      Document.delete_all
-
-      setup.each do |status, map|
-        map.each do |doc_type, quantity|
-          quantity.times do
-            Document.create(
-              status: status, doc_type: doc_type, external_id: Document.count
-            )
-          end
-        end
-      end
 
       old_a_errors.times do
         Document.with_error.type_a.create(updated_at: 1.day.ago)

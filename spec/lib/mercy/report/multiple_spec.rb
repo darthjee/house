@@ -3,6 +3,8 @@
 require 'spec_helper'
 
 describe Mercy::Report::Multiple do
+  include_context 'documents setup'
+
   let(:subject)     { described_class::Dummy.new }
   let(:a_errors)    { 1 }
   let(:a_successes) { 1 }
@@ -13,20 +15,6 @@ describe Mercy::Report::Multiple do
       success: { a: a_successes, b: b_successes },
       error: { a: a_errors, b: b_errors }
     }
-  end
-
-  before do
-    Document.delete_all
-
-    setup.each do |status, map|
-      map.each do |doc_type, quantity|
-        quantity.times do
-          Document.create(
-            status: status, doc_type: doc_type, external_id: Document.count
-          )
-        end
-      end
-    end
   end
 
   describe '#error?' do
