@@ -10,12 +10,6 @@ describe Mercy::Report::Multiple do
   let(:a_successes) { 1 }
   let(:b_errors)    { 1 }
   let(:b_successes) { 1 }
-  let(:setup) do
-    {
-      success: { a: a_successes, b: b_successes },
-      error: { a: a_errors, b: b_errors }
-    }
-  end
 
   describe '#error?' do
     context 'when all subreports are with error' do

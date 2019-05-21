@@ -7,7 +7,8 @@ class DocumentReportController < ApplicationController
   status_report :error_b, scope: :'type_b.with_error', clazz: Document
   status_report :error_c, clazz: Document, threshold: 0.5,
                           scope: "status = 'error'",
-                          base_scope: "doc_type = 'c'"
+                          base_scope: "doc_type = 'c'",
+                          external_key: :external_id
 
   status_report :total, type: :range, minimum: 1,
                         clazz: Document, on: :range

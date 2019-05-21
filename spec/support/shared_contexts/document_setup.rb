@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_context 'documents setup' do
   let(:a_successes)     { 0 }
   let(:b_successes)     { 0 }
@@ -9,7 +11,7 @@ RSpec.shared_context 'documents setup' do
   let(:setup) do
     {
       success: { a: a_successes, b: b_successes, c: c_successes },
-      error: { a: a_errors, b: b_errors, c: c_errors },
+      error: { a: a_errors, b: b_errors, c: c_errors }
     }
   end
 

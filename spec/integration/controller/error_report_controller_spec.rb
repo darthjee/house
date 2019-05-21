@@ -52,7 +52,6 @@ describe DocumentReportController, type: :controller do
     end
 
     before do
-
       old_a_errors.times do
         Document.with_error.type_a.create(updated_at: 1.day.ago)
       end
@@ -183,7 +182,7 @@ describe DocumentReportController, type: :controller do
       let(:old_c_errors) { 10 }
 
       let(:expected_percentage_type_c) { 0.5 }
-      let(:expected_error_ids_type_c)  { error_documents.pluck(:id) }
+      let(:expected_error_ids_type_c)  { (25..29).to_a }
 
       it 'Returns the status' do
         expect(response).to be_successful
