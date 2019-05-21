@@ -4,17 +4,23 @@ require 'spec_helper'
 
 describe DocumentReportController, type: :controller do
   describe 'error reports' do
-    let(:successes_a)     { 0 }
-    let(:successes_b)     { 0 }
-    let(:successes_c)     { 0 }
-    let(:errors_a)        { 0 }
-    let(:errors_b)        { 0 }
-    let(:errors_c)        { 0 }
-    let(:old_errors_a)    { 0 }
-    let(:old_errors_b)    { 0 }
-    let(:old_errors_c)    { 0 }
-
     let(:parameters)      { {} }
+    let(:a_successes)     { 0 }
+    let(:b_successes)     { 0 }
+    let(:c_successes)     { 0 }
+    let(:a_errors)        { 0 }
+    let(:b_errors)        { 0 }
+    let(:c_errors)        { 0 }
+    let(:old_a_errors)    { 0 }
+    let(:old_b_errors)    { 0 }
+    let(:old_c_errors)    { 0 }
+
+    let(:setup) do
+      {
+        success: { a: a_successes, b: b_successes, c: c_successes },
+        error: { a: a_errors, b: b_errors, c: c_errors },
+      }
+    end
 
     let(:error_documents) do
       Document.with_error.where(updated_at: (2.hours.ago..1.minute.from_now))
@@ -59,20 +65,23 @@ describe DocumentReportController, type: :controller do
     before do
       Document.delete_all
 
-      successes_a.times { Document.with_success.type_a.create }
-      successes_b.times { Document.with_success.type_b.create }
-      successes_c.times { Document.with_success.type_c.create }
-      errors_a.times    { Document.with_error.type_a.create }
-      errors_b.times    { Document.with_error.type_b.create }
-      errors_c.times    { Document.with_error.type_c.create }
+      setup.each do |status, map|
+        map.each do |doc_type, quantity|
+          quantity.times do
+            Document.create(
+              status: status, doc_type: doc_type, external_id: Document.count
+            )
+          end
+        end
+      end
 
-      old_errors_a.times do
+      old_a_errors.times do
         Document.with_error.type_a.create(updated_at: 1.day.ago)
       end
-      old_errors_b.times do
+      old_b_errors.times do
         Document.with_error.type_b.create(updated_at: 1.day.ago)
       end
-      old_errors_c.times do
+      old_c_errors.times do
         Document.with_error.type_c.create(updated_at: 1.day.ago)
       end
 
@@ -90,8 +99,8 @@ describe DocumentReportController, type: :controller do
     end
 
     context 'when there are only old documents' do
-      let(:old_errors_1) { 2 }
-      let(:old_errors_b) { 2 }
+      let(:old_1_errors) { 2 }
+      let(:old_b_errors) { 2 }
 
       it 'ignore old entries' do
         expect(response).to be_successful
@@ -103,8 +112,8 @@ describe DocumentReportController, type: :controller do
     end
 
     context 'when there are errors above the threshold' do
-      let(:errors_a)    { 3 }
-      let(:successes_a) { 1 }
+      let(:a_errors)    { 3 }
+      let(:a_successes) { 1 }
 
       let(:expected_status)            { 'error' }
       let(:expected_percentage_type_a) { 0.75 }
@@ -123,8 +132,8 @@ describe DocumentReportController, type: :controller do
     end
 
     context 'when there are errors below the threshold' do
-      let(:successes_a) { 49 }
-      let(:errors_b)    { 1 }
+      let(:a_successes) { 49 }
+      let(:b_errors)    { 1 }
 
       let(:expected_error_ids_type_b)  { error_documents.pluck(:id) }
       let(:expected_percentage_type_b) { 0.02 }
@@ -139,8 +148,8 @@ describe DocumentReportController, type: :controller do
     end
 
     context 'when parameters are given' do
-      let(:successes_a) { 1 }
-      let(:successes_b) { 1 }
+      let(:a_successes) { 1 }
+      let(:b_successes) { 1 }
 
       context 'when setting a new scope' do
         let(:parameters) { { scope: :all } }
@@ -155,7 +164,7 @@ describe DocumentReportController, type: :controller do
       end
 
       context 'when setting a new threshold' do
-        let(:errors_b)                   { 2 }
+        let(:b_errors)                   { 2 }
         let(:parameters)                 { { threshold: 0.5 } }
         let(:expected_percentage_type_b) { 0.5 }
         let(:expected_error_ids_type_b)  { error_documents.pluck(:id) }
@@ -171,7 +180,7 @@ describe DocumentReportController, type: :controller do
 
       context 'when setting a new period' do
         let(:parameters)                 { { period: '2day' } }
-        let(:old_errors_b)               { 2 }
+        let(:old_b_errors)               { 2 }
         let(:expected_percentage_type_b) { 0.5 }
         let(:expected_error_ids_type_b)  { error_documents.pluck(:id) }
         let(:expected_status)            { 'error' }
@@ -189,11 +198,11 @@ describe DocumentReportController, type: :controller do
     end
 
     context 'when scope is defined as string' do
-      let(:successes_a)  { 10 }
-      let(:successes_b)  { 10 }
-      let(:successes_c)  { 5 }
-      let(:errors_c)     { 5 }
-      let(:old_errors_c) { 10 }
+      let(:a_successes)  { 10 }
+      let(:b_successes)  { 10 }
+      let(:c_successes)  { 5 }
+      let(:c_errors)     { 5 }
+      let(:old_c_errors) { 10 }
 
       let(:expected_percentage_type_c) { 0.5 }
       let(:expected_error_ids_type_c)  { error_documents.pluck(:id) }
