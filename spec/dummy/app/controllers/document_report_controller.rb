@@ -16,11 +16,19 @@ class DocumentReportController < ApplicationController
                         scope: :with_error,
                         clazz: Document, on: :range
 
+  status_report :errors, on: :multiple,
+                         type: Mercy::Report::Multiple::Dummy,
+                         doc_type: %i[a b c]
+
   def error_status
     render_status
   end
 
   def range_status
     render_status(:range)
+  end
+
+  def multiple_status
+    render_status(:multiple)
   end
 end
