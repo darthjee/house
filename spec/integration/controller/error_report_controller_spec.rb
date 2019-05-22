@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe DocumentReportController, type: :controller do
   describe 'error reports' do
-    include_context 'documents setup'
+    include_context 'with documents setup'
 
     let(:parameters)      { {} }
     let(:old_a_errors)    { 0 }

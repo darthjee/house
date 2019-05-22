@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.shared_context 'documents setup' do
+RSpec.shared_context 'with documents setup' do
   let(:a_successes)     { 0 }
   let(:b_successes)     { 0 }
   let(:c_successes)     { 0 }

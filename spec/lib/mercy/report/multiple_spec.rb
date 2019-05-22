@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe Mercy::Report::Multiple do
-  include_context 'documents setup'
+  include_context 'with documents setup'
 
   let(:subject)     { described_class::Dummy.new }
   let(:a_errors)    { 1 }
