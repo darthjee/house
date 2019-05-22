@@ -9,7 +9,7 @@ module Mercy
   end
 end
 
-class Dummy
+class DummyReport
   ALLOWED_PARAMETERS = %i[period threshold].freeze
   def initialize(options); end
 end

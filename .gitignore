@@ -6,3 +6,4 @@ doc
 measurement
 rubycritic
 **/.*.swp
+**/*.log

@@ -29,8 +29,10 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'bundler',       '~> 1.16.1'
   gem.add_development_dependency 'pry-nav',       '~> 0.2.4'
+  gem.add_development_dependency 'rails',         '>= 5.2.0'
   gem.add_development_dependency 'rake',          '>= 12.3.1'
   gem.add_development_dependency 'rspec',         '>= 3.8'
+  gem.add_development_dependency 'rspec-rails',   '>= 3.8'
   gem.add_development_dependency 'rubocop',       '0.58.1'
   gem.add_development_dependency 'rubocop-rspec', '1.30.0'
   gem.add_development_dependency 'rubycritic',    '>= 4.0.2'

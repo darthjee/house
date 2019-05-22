@@ -31,10 +31,10 @@ describe Mercy::ReportConfig do
     end
 
     context 'when a global class is given as type' do
-      let(:config) { { type: Dummy } }
+      let(:config) { { type: DummyReport } }
 
       it do
-        expect(subject.build(parameters)).to be_a(Dummy)
+        expect(subject.build(parameters)).to be_a(DummyReport)
       end
     end
   end
