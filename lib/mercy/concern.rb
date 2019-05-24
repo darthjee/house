@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# Concern exposing methods needed to build reports
+#
+# @example (see Mercy::ClassMethods#status_report)
 module Mercy
   extend ActiveSupport::Concern
 
