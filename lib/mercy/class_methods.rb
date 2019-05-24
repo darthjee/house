@@ -14,6 +14,8 @@ module Mercy
     #   When a +Symbol+ is given, cleass will be found as a class
     #   defined in {Mercy::Report Mercy::Report}
     #
+    # @return [Array<Symbol>] Existing reports for configuration
+    #
     # @example
     #   class Document < ActiveRecord::Base
     #     scope :with_error,   -> { where(status: :error) }
@@ -72,7 +74,7 @@ module Mercy
     end
 
     # @private
-    # @pai private
+    # @api private
     #
     # Status report builder for class
     #
