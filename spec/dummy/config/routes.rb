@@ -11,5 +11,6 @@ Rails.application.routes.draw do
 
   resources :example_report, only: [] do
     get :status, on: :collection
+    get :count_status, on: :collection
   end
 end

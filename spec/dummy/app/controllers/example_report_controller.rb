@@ -12,7 +12,16 @@ class ExampleReportController < ApplicationController
                            clazz: Document,
                            external_key: :external_id
 
+  status_report :successes, on: :successes,
+                            clazz: Document,
+                            type: Mercy::Report::Multiple::Successes,
+                            minimum: 10
+
   def status
     render_status
+  end
+
+  def count_status
+    render_status(:successes)
   end
 end
