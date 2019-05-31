@@ -19,9 +19,9 @@ module Mercy
     #
     # @example
     #   class Document < ActiveRecord::Base
-    #     scope :with_error,   -> { where(status: :error) }
-    #     scope :type_a,       -> { where(doc_type: :a) }
-    #     scope :type_b,       -> { where(doc_type: :b) }
+    #     scope :with_error, -> { where(status: :error) }
+    #     scope :type_a,     -> { where(doc_type: :a) }
+    #     scope :type_b,     -> { where(doc_type: :b) }
     #   end
     #
     #   class ExampleReportController < ApplicationController
@@ -52,22 +52,22 @@ module Mercy
     #   Document.with_error.create(doc_type: :a, external_id: 10)
     #   Document.with_error.create(doc_type: :b, external_id: 20)
     #
-    #    get '/example_reports/status'
-    #    #returns http_status: 500
-    #    # json:
-    #    # {
-    #    #   "status":"error",
-    #    #   "errors_a":{
-    #    #     "ids":[10],
-    #    #     "percentage":0.02,
-    #    #     "status":"ok"
-    #    #   },
-    #    #   "errors_b":{
-    #    #     "ids":[20],
-    #    #     "percentage":0.25,
-    #    #     "status":"error"
-    #    #   }
-    #    # }
+    #   get '/example_reports/status'
+    #   #returns http_status: 500
+    #   # json:
+    #   # {
+    #   #   "status":"error",
+    #   #   "errors_a":{
+    #   #     "ids":[10],
+    #   #     "percentage":0.02,
+    #   #     "status":"ok"
+    #   #   },
+    #   #   "errors_b":{
+    #   #     "ids":[20],
+    #   #     "percentage":0.25,
+    #   #     "status":"error"
+    #   #   }
+    #   # }
     def status_report(id, **options)
       options[:id] = id
 
