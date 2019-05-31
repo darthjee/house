@@ -8,7 +8,8 @@ module Mercy
     # register a report
     #
     # @param id [String,Symbol] report identifier
-    # @param options [Hash] report options (see the report type for more options)
+    # @param options [Hash] report options
+    #   (see the {Report report} type for more options)
     # @option options type [Symbol,Class] type of the report.
     #   When a +Class+ is given, this will be used as report class.
     #   When a +Symbol+ is given, cleass will be found as a class

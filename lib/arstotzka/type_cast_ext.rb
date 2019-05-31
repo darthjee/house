@@ -5,7 +5,8 @@ module Arstotzka
   #
   # Extension of Arstotzka::TypeCast
   #
-  # @see https://www.rubydoc.info/gems/arstotzka/Arstotzka/TypeCast Arstotzka::Typecast
+  # @see https://www.rubydoc.info/gems/arstotzka/Arstotzka/TypeCast
+  #   Arstotzka::Typecast
   module TypeCast
     # Converts value to period
     #
