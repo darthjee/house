@@ -18,10 +18,13 @@ rules:
     exclude: []
   ReturnTag:
     enabled: true
-    exclude: []
+    exclude:
+      - Mercy::PeriodParser#period
   Summary::Presence:
     enabled: true
-    exclude: []
+    exclude:
+      - Mercy::PeriodParser#initialize
+      - Mercy::PeriodParser#period
   Summary::Length:
     enabled: true
     exclude: []
