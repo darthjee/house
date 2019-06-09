@@ -15,13 +15,21 @@ rules:
     exclude: []
   ExampleTag:
     enabled: true
-    exclude: []
+    exclude:
+      - Mercy::Report#json
+      - Mercy::Report#initialize
   ReturnTag:
     enabled: true
-    exclude: []
+    exclude:
+      - Mercy::PeriodParser#period
+      - Mercy::Report#json
   Summary::Presence:
     enabled: true
-    exclude: []
+    exclude:
+      - Mercy::PeriodParser#initialize
+      - Mercy::PeriodParser#period
+      - Mercy::Report#initialize
+      - Mercy::Report#json
   Summary::Length:
     enabled: true
     exclude: []
